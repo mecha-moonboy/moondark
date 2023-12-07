@@ -420,8 +420,6 @@ minetest.register_node("moondark:rock", {
     color = "#1a1a1aff",
     --inventory_image = "rock_inv.png",
     --wield_image = "rock_inv.png",
-    drop = "moondark:rock",
-    groups = {stone = 1, hand = 3, projectile = 1},
     paramtype = "light",
     drawtype = "nodebox",
     node_box = {
@@ -429,5 +427,28 @@ minetest.register_node("moondark:rock", {
         fixed = {
             {-0.25, -0.5, -0.25, 0.25, -0.25, 0.25}, -- rock
         }
-    }
-  })
+    },
+    drop = "moondark:rock",
+    groups = {stone = 1, hand = 3, projectile = 1},
+})
+
+minetest.register_node("moondark:driftwood", {
+    description = "driftwood",
+    tiles = {
+        "blank.png^ground.png",
+    },
+    paramtype2 = "4dir",
+    on_place = minetest.rotate_node,
+    drawtype = "nodebox",
+    node_box = {
+        type = "fixed",
+        fixed = {
+            {-0.75, -0.5, -0.75, 0.75, -0.125, -0.25},
+            {-0.75, -0.5, -0.25, -0.25, -0.125, 0.75},
+            {-0.75, -0.125, 0.25, -0.25, 0.75, 0.75},
+        }
+    },
+    color = "#887755ff",
+    groups = {not_in_creative_inventory = 1, hand = 2},
+    drop = "moondark:stick",
+})

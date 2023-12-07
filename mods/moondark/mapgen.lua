@@ -192,4 +192,24 @@ minetest.register_decoration({ name = "moondark:rock",
     y_max = 300,
     y_min = -3000,
     decoration = "moondark:rock",
+
+
+})
+
+minetest.register_decoration({ name = "moondark:driftwood",
+    deco_type = "simple",
+    place_on = {"moondark:sand"},
+    sidelen = 64,
+    noise_params = {
+        offset = 0.001,
+        scale = 0.0005,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 1,
+        persist = 0.3
+    },
+    y_max = 3,
+    y_min = 0,
+    decoration = "moondark:driftwood",
+    rotation = "random"
 })
