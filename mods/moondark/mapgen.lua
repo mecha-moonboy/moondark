@@ -182,7 +182,7 @@ minetest.register_decoration({ name = "moondark:rock",
     place_on = {"moondark:stone"},
     sidelen = 16,
     noise_params = {
-        offset = 0.1,
+        offset = 0.05,
         scale = 0.005,
         spread = {x = 100, y = 100, z = 100},
         seed = 329,
