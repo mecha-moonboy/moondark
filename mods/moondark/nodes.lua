@@ -47,7 +47,8 @@ minetest.register_node("moondark:stone",{
 minetest.register_node("moondark:turf",{
     description = "turf",
     tiles = {
-        "blank.png^ground.png"
+        {name = "blank.png^ground.png"},
+
     },
     color = "#002000ff",
     groups = {hand = 3, soil = 1, granular = 2},
