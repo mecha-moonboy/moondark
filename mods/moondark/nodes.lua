@@ -43,7 +43,6 @@ minetest.register_node("moondark:stone",{
 })
 
 -- Grainy
-
 minetest.register_node("moondark:turf",{
     description = "turf",
     tiles = {
@@ -306,7 +305,7 @@ minetest.register_node("moondark:malpa_wood", {
     --paramtype2 = "facedir",
     --on_place = minetest.rotate_node,
     color = "#776622ff",
-    groups = {planks = 2},
+    groups = {planks = 2, fuel = 1},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
     end
@@ -321,7 +320,7 @@ minetest.register_node("moondark:malpa_leaves", {
     mesh = "all_faces.obj",
     color = "#062705ff",
     use_texture_alpha = "clip",
-    groups = {hand = 2, fiberous = 1, leaves = 1},
+    groups = {hand = 2, fiberous = 1, leaves = 1, fuel = 1},
     selection_box = {
         type = "fixed",
         fixed = {
@@ -403,7 +402,7 @@ minetest.register_node("moondark:grass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
-	groups = {hand = 2, fiberous = 1, flora = 1, attached_node = 1, grass = 1, flammable = 1},
+	groups = {hand = 2, fiberous = 1, flora = 1, fuel = 1, attached_node = 1, grass = 1, flammable = 1},
 	selection_box = {
 		type = "fixed",
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
