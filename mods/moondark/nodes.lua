@@ -181,7 +181,7 @@ minetest.register_node("moondark:lowan_log", {
     end,
     is_ground_content = false,
     color = "#552205ff",
-    groups = {wooden = 2, log = 1},
+    groups = {wooden = 2, log = 1, flammable = 1},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:lowan_wood 4", 8, "axe")
     end
@@ -196,7 +196,7 @@ minetest.register_node("moondark:lowan_wood", {
     --paramtype2 = "facedir",
     --on_place = minetest.rotate_node,
     color = "#552205ff",
-    groups = {planks = 2},
+    groups = {planks = 2, flammable = 1},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
     end
@@ -209,7 +209,7 @@ minetest.register_node("moondark:lowan_leaves", {
     },
     drawtype = "allfaces_optional",
     color = "#002207ff",
-    groups = {hand = 2, fiberous = 1, leaves = 1},
+    groups = {hand = 2, fiberous = 1, leaves = 1, flammable = 1},
     drop = {
         max_item = 1,
         items = {
@@ -290,7 +290,7 @@ minetest.register_node("moondark:malpa_log", {
     end,
     is_ground_content = false,
     color = "#776622ff",
-    groups = {wooden = 2, log = 1},
+    groups = {wooden = 2, log = 1, flammable = 1},
     -- on_punch = function(pos, node, clicker, _)
     --     return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:lowan_wood 4", 8, "axe")
     -- end
@@ -305,7 +305,7 @@ minetest.register_node("moondark:malpa_wood", {
     --paramtype2 = "facedir",
     --on_place = minetest.rotate_node,
     color = "#776622ff",
-    groups = {planks = 2, fuel = 1},
+    groups = {planks = 2, flammable = 1},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
     end
@@ -320,7 +320,7 @@ minetest.register_node("moondark:malpa_leaves", {
     mesh = "all_faces.obj",
     color = "#062705ff",
     use_texture_alpha = "clip",
-    groups = {hand = 2, fiberous = 1, leaves = 1, fuel = 1},
+    groups = {hand = 2, fiberous = 1, leaves = 1, flammable = 1},
     selection_box = {
         type = "fixed",
         fixed = {
@@ -381,7 +381,7 @@ minetest.register_node("moondark:noconut", {
     sunlight_propagates = true,
     walkable = false,
     buildable_to = false,
-    groups = {hand = 2, flammable = 1,--[[ falling_node = 1,attached_node=1,]] },
+    groups = {hand = 2,--[[ falling_node = 1,attached_node=1,]] },
     after_place_node = function(pos, placer, itemstack)
 		minetest.set_node(pos, {name = "moondark:noconut", param2 = 1})
 	end,
@@ -402,7 +402,7 @@ minetest.register_node("moondark:grass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
-	groups = {hand = 2, fiberous = 1, flora = 1, fuel = 1, attached_node = 1, grass = 1, flammable = 1},
+	groups = {hand = 2, fiberous = 1, flora = 1, flammable = 1, attached_node = 1, grass = 1, flammable = 1},
 	selection_box = {
 		type = "fixed",
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
@@ -448,6 +448,6 @@ minetest.register_node("moondark:driftwood", {
         }
     },
     color = "#887755ff",
-    groups = {not_in_creative_inventory = 1, hand = 2},
+    groups = {not_in_creative_inventory = 1, hand = 2, flammable = 1},
     drop = "moondark:stick",
 })

@@ -9,6 +9,7 @@ local item = {
 
 		local stack = ItemStack(itemstring)
 		local itemdef = minetest.registered_items[stack:get_name()]
+		self.itemstack = stack
 		if itemdef and itemdef.groups.flammable ~= 0 then
 			self.flammable = itemdef.groups.flammable
 		end
@@ -17,16 +18,17 @@ local item = {
 	heat = function(self)
 		-- disappear in a smoke puff
 		local p = self.object:get_pos()
-		local meta = self.object:get_meta()
-		local curr_heat = meta:get_int("heat")
-		minetest.log("Item heat: " .. curr_heat)
-		-- --local output = minetest.get_craft_result({method = "cooking", items = builtin_item.get_item(self)})
-		-- self.object:remove() -- edit to cook item instead of removing it
+		--minetest.log("'heat' function was called. Entity contains: ".. self.itemstack.name)
+		local output = md_fire.get_recipe_output(self.itemstack:get_name())
+		minetest.add_item(p, ItemStack(output))
+
+		self.object:remove() -- edit to cook item instead of removing it
+
 	end,
 
 	on_step = function(self, dtime, ...)
 		builtin_item.on_step(self, dtime, ...)
-
+		--minetest.log("Calling on_step for an item")
 		-- has the flammable property
 		if self.flammable then
 			-- flammable, check for igniters every 10 s
@@ -44,6 +46,9 @@ local item = {
 				end
 				if node then
 					minetest.log("Current node is ".. node.name)
+					if minetest.get_node_group(node.name, "fire") ~= 0 then
+						self.heat(self)
+					end
 				end
 			end
 		end

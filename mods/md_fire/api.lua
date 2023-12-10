@@ -1,3 +1,16 @@
+
+md_fire.registered_fire_recipes = {}
+
+-- register fire recipe
+function md_fire.register_fire_recipe(item_name, output_name)
+    md_fire.registered_fire_recipes[item_name] = output_name
+end
+
+-- get the output of a given item being cooked
+function md_fire.get_recipe_output(item_name)
+    return md_fire.registered_fire_recipes[item_name]
+end
+
 function md_fire.register_fire_node(fire_node_def)
 
     local temp = table.copy(md_fire.fire_node_template)
@@ -23,12 +36,12 @@ function md_fire.node_near_fuel(pos)
     local pos_east = pos:offset(1, 0, 0)
     local pos_west = pos:offset(-1, 0, 0)
 
-    if not (minetest.get_node_group(minetest.get_node(pos_up).name, "fuel") > 0) and
-    not (minetest.get_node_group(minetest.get_node(pos_down).name, "fuel") > 0) and
-    not (minetest.get_node_group(minetest.get_node(pos_north).name, "fuel") > 0) and
-    not (minetest.get_node_group(minetest.get_node(pos_south).name, "fuel") > 0) and
-    not (minetest.get_node_group(minetest.get_node(pos_east).name, "fuel") > 0) and
-    not (minetest.get_node_group(minetest.get_node(pos_west).name, "fuel") > 0) then
+    if not (minetest.get_node_group(minetest.get_node(pos_up).name, "flammable") > 0) and
+    not (minetest.get_node_group(minetest.get_node(pos_down).name, "flammable") > 0) and
+    not (minetest.get_node_group(minetest.get_node(pos_north).name, "flammable") > 0) and
+    not (minetest.get_node_group(minetest.get_node(pos_south).name, "flammable") > 0) and
+    not (minetest.get_node_group(minetest.get_node(pos_east).name, "flammable") > 0) and
+    not (minetest.get_node_group(minetest.get_node(pos_west).name, "flammable") > 0) then
         return false
     end
 
@@ -37,9 +50,9 @@ end
 
 -- check if node can be ignited
 function md_fire.check_can_ignite(pos)
-    minetest.log("Checking if " .. minetest.get_node(pos).name .. " can be lit.")
     -- position isn't air, return false
-    if not minetest.get_node(pos).name == "air" then
+    local node = minetest.get_node(pos)
+    if node.name ~= "air" then
         return false
     end
     -- there isn't a fuel block nearby
@@ -83,16 +96,15 @@ md_fire.fire_node_template = {
     buildable_to = false,
     damage_per_second = 1,
     selection_box = {
-        {-0.5, -0.5, -0.5, 0.5, 0, 0.5}
-    },
-    collision_box = {
-        {-0.5, -0.5, -0.5, 0.5, 0, 0.5, }
+        type = "fixed",
+		fixed = {-1/2, -1/2,-1/2, 1/2, -1/8, 1/2},
     },
     on_timer = function(pos, elapsed)
 
         -- if no fuel around node
         if not md_fire.node_near_fuel(pos) then
             minetest.remove_node(pos)-- remove node
+            return false
         end
 
         -- define a random air node to ignite
@@ -102,10 +114,10 @@ md_fire.fire_node_template = {
             minetest.set_node(rand_node, {name = "md_fire:fire_1"})
         end
 
+        -- if the node below's heat level is higher than the flame level
+        -- upgrade the flame level
+
         --minetest.log("Executing fire timer. Fuel detected, maintaining existence.")
         return true
     end,
-    -- on_construct = function(pos)
-    --     minetest.get_node_timer(pos):start()
-    -- end
 }
