@@ -290,7 +290,7 @@ minetest.register_node("moondark:malpa_log", {
     end,
     is_ground_content = false,
     color = "#776622ff",
-    groups = {wooden = 2, log = 1, flammable = 1},
+    groups = {wooden = 2, log = 1, flammable = 2},
     -- on_punch = function(pos, node, clicker, _)
     --     return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:lowan_wood 4", 8, "axe")
     -- end
@@ -305,7 +305,7 @@ minetest.register_node("moondark:malpa_wood", {
     --paramtype2 = "facedir",
     --on_place = minetest.rotate_node,
     color = "#776622ff",
-    groups = {planks = 2, flammable = 1},
+    groups = {planks = 2, flammable = 2},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
     end
@@ -448,6 +448,6 @@ minetest.register_node("moondark:driftwood", {
         }
     },
     color = "#887755ff",
-    groups = {not_in_creative_inventory = 1, hand = 2, flammable = 1},
+    groups = {not_in_creative_inventory = 1, hand = 2, flammable = 2},
     drop = "moondark:stick",
 })

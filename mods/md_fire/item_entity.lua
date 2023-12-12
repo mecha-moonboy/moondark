@@ -12,17 +12,20 @@ local item = {
 		self.itemstack = stack
 		if itemdef and itemdef.groups.flammable ~= 0 then
 			self.flammable = itemdef.groups.flammable
+			self.heat = 0
 		end
 	end,
 
-	heat = function(self)
-		-- disappear in a smoke puff
-		local p = self.object:get_pos()
-		--minetest.log("'heat' function was called. Entity contains: ".. self.itemstack.name)
-		local output = md_fire.get_recipe_output(self.itemstack:get_name())
-		minetest.add_item(p, ItemStack(output))
+	heat = function(self, node)
 
-		self.object:remove() -- edit to cook item instead of removing it
+		local fire_level = minetest.get_node_group(node, "fire")
+		if fire_level >= self.flammable then
+			local output = md_fire.get_recipe_output(self.itemstack:get_name())
+			minetest.add_item(p, ItemStack(output))
+			self.object:remove() -- edit to cook item instead of removing it
+		else
+
+		end
 
 	end,
 
@@ -47,7 +50,7 @@ local item = {
 				if node then
 					minetest.log("Current node is ".. node.name)
 					if minetest.get_node_group(node.name, "fire") ~= 0 then
-						self.heat(self)
+						self.heat(self, node)
 					end
 				end
 			end

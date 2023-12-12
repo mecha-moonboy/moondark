@@ -1,5 +1,8 @@
 md_fire.register_fire_node({
     name = "fire_1",
+
+    --max_heat = 1,
+
     heat = 1,
     light = 5,
     tiles = {

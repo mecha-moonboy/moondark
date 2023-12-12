@@ -6,6 +6,13 @@ function md_fire.register_fire_recipe(item_name, output_name)
     md_fire.registered_fire_recipes[item_name] = output_name
 end
 
+function md_fire.register_flammable_item(itemname, level)
+    local item = table.copy(minetest.registered_items[itemname])
+
+    item.groups.flammable = level
+    minetest.register_craftitem(itemname, item)
+end
+
 -- get the output of a given item being cooked
 function md_fire.get_recipe_output(item_name)
     return md_fire.registered_fire_recipes[item_name]
