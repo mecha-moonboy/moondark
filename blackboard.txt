@@ -12,7 +12,6 @@ In Progress:
     - food eating [1/10] - cooldown?
 
 Pending Completion:
-    - midlights [9/10] - PU
 
 To Do:
     Immediate:
@@ -96,6 +95,7 @@ Done:
         - Grass
         - Lowan Log, Leaves, Wood
         - Malpa Log, Leaves(advanced), Wood
+        - Midlights
     - Status Effects: [textures, HUD]
         - Quick
         - Weightless
