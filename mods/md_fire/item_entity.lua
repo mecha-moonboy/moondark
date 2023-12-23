@@ -12,7 +12,7 @@ local item = {
 		self.itemstack = stack
 		if itemdef and itemdef.groups.flammable ~= 0 then
 			self.flammable = itemdef.groups.flammable
-			self.heat = 0
+			self.heat_timer = 0
 		end
 	end,
 
