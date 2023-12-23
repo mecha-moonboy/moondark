@@ -15,6 +15,7 @@ Pending Completion:
 
 To Do:
     Immediate:
+        - ice
         - hand loom -> cloth -> basket
         - fix hidden midlight collision
         - armor/accessories:
@@ -45,6 +46,9 @@ To Do:
         - Add status effect HUD markers
 
     Biomes:
+        - desert
+        - swamp
+        - snow forest
         - rocky desert (stones, perhaps some snow, sparse bushes, flat)
         - rocky plains (large boulders, snow, sparse trees and bushes)
         - ancient redwoods
