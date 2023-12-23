@@ -211,7 +211,11 @@ minetest.register_node("moondark:lowan_leaves", {
     },
     drawtype = "allfaces_optional",
     color = "#002207ff",
+<<<<<<< Updated upstream
     groups = {hand = 2, fiberous = 1, leaves = 1},
+=======
+    groups = {hand = 2, fiberous = 1, leaves = 1,},
+>>>>>>> Stashed changes
     drop = {
         max_item = 1,
         items = {
@@ -262,7 +266,7 @@ minetest.register_node("moondark:lowan_seedling", {
     sunlight_propagates = true,
     walkable = false,
     buildable_to = true,
-    groups = {hand = 2, flora = 1, attached_node = 1, grass = 1, flammable = 1},
+    groups = {hand = 2, flora = 1, attached_node = 1, grass = 1},
     selection_box = {
         type = "fixed",
         fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
@@ -404,7 +408,11 @@ minetest.register_node("moondark:grass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
+<<<<<<< Updated upstream
 	groups = {hand = 2, fiberous = 1, flora = 1, attached_node = 1, grass = 1, flammable = 1},
+=======
+	groups = {hand = 2, fiberous = 1, flora = 1, attached_node = 1, grass = 1},
+>>>>>>> Stashed changes
 	selection_box = {
 		type = "fixed",
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},

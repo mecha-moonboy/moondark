@@ -1,6 +1,7 @@
 In Progress:
     - everything
     - fire -> charcoal
+    - hand loom -> cloth -> curtain
     - apsen bark + cord + charcoal = notebook
     - farming [0/10] - theorize farming system
         - Irrigation
@@ -19,16 +20,20 @@ To Do:
         - fix hidden midlight collision
         - armor/accessories:
             - footwear (speed boost, fall resistance factor)
-        -
+            - clothing (cold resistance, slight armor bonus)
 
     Bugfixes:
 
     Progression/Mechanics:
         - Mob API
-        - Farm pests
+        - Predators and prey
         - Wanderers - NPCs, have a rapport system and can do menial tasks
 
+        - Farm pests
+
         - Sanom - fish
+
+        - Traps
 
         - Fire
         - Crucible
@@ -115,16 +120,17 @@ Done:
         - stone axe, pickaxe, and machete
         - digging tool
 
-Farming:
-    - crop growth timer and parameters
-    - harvesting, stages, and drops
+Theory:
+    Farming:
+        - crop growth timer and parameters
+        - harvesting, stages, and drops
 
 
 LEGEND:
 PU - Potentially Unstable
 VU - Very Unstable
 U - Unstable
-  - Stable
+  - Stable (hopefully)
 E - Experimental
 NA:### - Needs Adjusting: Issue ID:###
 
