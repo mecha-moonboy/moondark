@@ -1,35 +1,42 @@
 --[[
 Breaking/Using Groups:
-- hand
-- stone [pickaxe]
-- soil [shovel]
-- wooden [axe]
-- fiberous [blade]
-- heated [tongs]
+    - hand
+    - stone [pickaxe]
+    - granular [shovel]
+    - wooden [axe]
+    - fiberous [blade]
+    - heated [tongs]
 
 Node Type Groups:
-- liquid
-- falling_node
-
+    - liquid
+    - falling_node
+    - soil
 
 Ground Nodes:
-
-moondark:stone
-moondark:water
-moondark:turf
-moondark:dirt
-moondark:snow
-moondark:clay
+    moondark:stone
+    moondark:water
+    moondark:turf
+    moondark:dirt
+    moondark:snow
+    moondark:clay
 
 Tree Nodes:
 
-moondark:lowan_log
-moondark:lowan_leaves
-moondark:lowan_wood
+    moondark:lowan_log
+    moondark:lowan_leaves
+    moondark:lowan_wood
+
+    moondark:malpa_log
+    moondark:malpa_leaves
+    moondark:malpa_wood
+
+    moondark:sprute_log
+    moondark:sprute_leaves
+    moondark:sprute_wood
 
 Plant and Decor Nodes:
-moondark:grass
-moondark:rock
+    moondark:grass
+    moondark:rock
 ]]
 
 -- Stone

@@ -8,31 +8,18 @@ minetest.register_alias("oak", "moondark:oak_log")
 
 --minetest.set_mapgen_setting(name, value, [override_meta])
 
-local settings = table.copy(minetest.get_mapgen_setting_noiseparams("mgvalleys_np_valley_depth"))
-settings.persistence = 1
---minetest.log(minetest.serialize(settings))
-minetest.set_mapgen_setting_noiseparams("mgvalleys_np_valley_depth" , settings, true)
---minetest.log(minetest.serialize(minetest.get_mapgen_setting_noiseparams("mgvalleys_np_terrain_height")))
+local settings = table.copy(minetest.get_mapgen_setting_noiseparams("mgvalleys_np_terrain_height"))
+settings.persistence = 0.6 -- default 0.4
+settings.scale = 120 -- def: 50
+settings.offset = -40 -- def: -10
+settings.octaves = 7 -- def: 6
+settings.lacunarity = 2 -- def: 2
+minetest.set_mapgen_setting_noiseparams("mgvalleys_np_terrain_height" , settings, true)
 
--- minetest.set_mapgen_setting_noiseparams("mgvalleys_np_terrain_height", {
--- 	lacunarity = 2,
--- 	persistence = 0.7,
--- 	seed = 5202,
--- 	spread = {x=1024,y=1024,z=1024},
--- 	scale = 50,
--- 	octaves = 8,
--- 	offset = -0.4,
--- }, true)
 
--- minetest.set_noiseparams("mgvalleys_np_valley_depth", {
--- 	lacunarity = 2,
--- 	persistence = 1,
--- 	seed = -1914,
--- 	spread = {x=512,y=512,z=512},
--- 	scale = 1,
--- 	octaves = 1,
--- 	offset = 5,
--- })
+
+--minetest.set_mapgen_setting("mgvalleys_spflags", "altitude_chill, humid_rivers, vary_river_depth, altitude_dry")
+minetest.set_mapgen_setting("mgvalleys_spflags", "altitude_chill, vary_river_depth, altitude_dry")
 
 minetest.register_biome({ name = "plains",
     node_top = "turf",
@@ -42,9 +29,9 @@ minetest.register_biome({ name = "plains",
     depth_filler = 10,
     node_river_water = "mapgen_water_source",
     vertical_blend = 16,
-    y_max = 80,
+    y_max = 1024,
 	y_min = 10,
-    humidity_point = 50,
+    humidity_point = 40,
     heat_point = 50
 })
 
@@ -56,10 +43,10 @@ minetest.register_biome({ name = "lowan_forest",
     depth_filler = 10,
     node_river_water = "mapgen_water_source",
     vertical_blend = 16,
-    y_max = 100,
+    y_max = 1024,
 	y_min = 10,
-    humidity_point = 50,
-    heat_point = 50
+    humidity_point = 49,
+    heat_point = 49
 })
 
 minetest.register_biome({ name = "snow_plains",
@@ -70,9 +57,9 @@ minetest.register_biome({ name = "snow_plains",
     depth_filler = 10,
     node_river_water = "mapgen_water_source",
     vertical_blend = 16,
-    y_max = 80,
+    y_max = 1024,
 	y_min = 10,
-    humidity_point = 50,
+    humidity_point = 51,
     heat_point = 20,
 })
 
@@ -84,24 +71,24 @@ minetest.register_biome({ name = "sprute_forest",
     depth_filler = 10,
     node_river_water = "mapgen_water_source",
     vertical_blend = 16,
-    y_max = 150,
+    y_max = 1024,
 	y_min = 10,
     humidity_point = 50,
     heat_point = 20
 })
 
-minetest.register_biome({ name = "snow_slopes",
-    node_top = "snow",
-    node_stone = "mapgen_stone",
-    depth_top = 2,
-    --node_filler = "dirt",
-    --depth_filler = 10,
-    node_river_water = "mapgen_water_source",
-    y_max = 200,
-	y_min = 100,
-    humidity_point = 50,
-    heat_point = 20,
-})
+-- minetest.register_biome({ name = "snow_slopes",
+--     node_top = "snow",
+--     node_stone = "mapgen_stone",
+--     depth_top = 2,
+--     --node_filler = "dirt",
+--     --depth_filler = 10,
+--     node_river_water = "mapgen_water_source",
+--     y_max = 200,
+-- 	y_min = 100,
+--     humidity_point = 50,
+--     heat_point = 20,
+-- })
 
 minetest.register_biome({ name = "snow_peak",
     node_top = "snow",
@@ -113,6 +100,7 @@ minetest.register_biome({ name = "snow_peak",
     y_max = 31000,
 	y_min = 200,
     heat_point = 20,
+    humidity_point = 50,
 })
 
 minetest.register_biome({ name = "stone_slopes",
@@ -151,20 +139,31 @@ minetest.register_biome({ name = "beach",
     node_river_water = "mapgen_water_source",
     node_riverbed = "moondark:clay",
     depth_riverbed = 1,
-    vertical_blend = 32,
-    y_max = 32,
-	y_min = -100,
+    vertical_blend = 6,
+    y_max = 10,
+	--y_min = -100,
+    heat_point = 50,
+    humidity_point = 50
+})
+
+minetest.register_biome({ name = "stone_beach",
+    node_stone = "mapgen_stone",
+    node_river_water = "mapgen_water_source",
+    vertical_blend = 6,
+    y_max = 10,
+    heat_point = 21,
+    humidity_point = 51
 })
 
 -- Trees
 minetest.register_decoration({ name = "moondark:lowan_tree",
     deco_type = "schematic",
     place_on = {"moondark:turf"},
-    sidelen = 23,
+    sidelen = 64,
     place_offset_y = -2,
     noise_params = {
-        offset = 0.001,
-        scale = 0.1,
+        offset = 0.02,
+        scale = 0.01,
         spread = {x = 512, y = 512, z = 512},
         seed = 2,
         octaves = 1,
@@ -181,18 +180,18 @@ minetest.register_decoration({ name = "moondark:lowan_tree",
 minetest.register_decoration({ name = "moondark:sprute_tree",
     deco_type = "schematic",
     place_on = {"moondark:snow", "moondark:turf"},
-    sidelen = 23,
+    sidelen = 64,
     place_offset_y = -2,
     noise_params = {
-        offset = 0.0,
-        scale = 0.07,
+        offset = 0.02,
+        scale = 0.01,
         spread = {x = 512, y = 512, z = 512},
         seed = 2,
         octaves = 1,
         persist = 1
     },
     biomes = {"sprute_forest"},
-    y_max = 150,
+    --y_max = 150,
     y_min = 10,
     schematic = minetest.get_modpath("moondark").."/schematics/sprute_tree.mts",
     flags = "place_center_x, place_center_z",
@@ -213,7 +212,7 @@ minetest.register_decoration({ name = "moondark:sprute_tree_dead",
         persist = 1
     },
     biomes = {"sprute_forest"},
-    y_max = 150,
+    --y_max = 150,
     y_min = 10,
     schematic = minetest.get_modpath("moondark").."/schematics/sprute_tree_dead.mts",
     flags = "place_center_x, place_center_z",
@@ -250,7 +249,7 @@ minetest.register_decoration({ name = "moondark:grass",
     sidelen = 16,
     fill_ratio = 0.1,
     y_max = 200,
-    y_min = 16,
+    y_min = 8,
     decoration = "moondark:grass",
 })
 
@@ -380,6 +379,7 @@ minetest.register_decoration({ name = "moondark:sprute_log",
     },
     schematic = minetest.get_modpath("moondark").."/schematics/sprute_log.mts",
     rotation = "random",
+    place_offset_y = 1,
     flags = " place_center_x, place_center_z",
 })
 
@@ -392,12 +392,12 @@ minetest.register_decoration({ name = "moondark:sprute_tree_fallen",
         offset = 0.001,
         scale = 0.0001,
         spread = {x = 100, y = 100, z = 100},
-        seed = 329,
+        seed = 276,
         octaves = 1,
-        persist = 0.2
+        persist = 0.1
     },
     schematic = minetest.get_modpath("moondark").."/schematics/sprute_tree_fallen.mts",
-    place_offset_y = -1,
+    place_offset_y = 0,
     flags = "place_center_x, place_center_z",
     rotation = "random"
 })
