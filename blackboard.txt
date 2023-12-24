@@ -77,9 +77,10 @@ To Do:
         - creepers - vine
 
     Node Critters:
-        - snairls
-        - ribbid
-        - serpin
+        - snairls - snail
+        - ribbid - frog
+        - serpin - snek
+        - malc - clam
 
 
 Done:

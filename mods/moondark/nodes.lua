@@ -49,6 +49,16 @@ minetest.register_node("moondark:stone",{
     groups = {stone = 4},
 })
 
+minetest.register_node("moondark:ice",{
+    description = "ice",
+    drawtype = "glasslike",
+    tiles = {
+        "blank.png^[multiply:#9999ffff^[opacity:200^diagonal_stripes_broken.png^[opacity:200"
+    },
+    color = "#ddddffff",
+    use_texture_alpha = "blend",
+    groups = {stone = 4},
+})
 -- Grainy
 
 minetest.register_node("moondark:turf",{
