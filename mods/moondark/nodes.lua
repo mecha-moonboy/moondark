@@ -359,6 +359,7 @@ minetest.register_node("moondark:malpa_leaves", {
 	sunlight_propagates = true,
 })
 local px_3 = 0.5*3/4
+local px_2 = 0.25
 local px_1 = 0.5/4
 minetest.register_node("moondark:noconut", {
     description = "noconut",
@@ -366,13 +367,16 @@ minetest.register_node("moondark:noconut", {
     node_box = {
         type = "connected",
         fixed = {
-            {-px_3, -px_3 - px_1, -px_3, px_3, px_3 - px_1, px_3},
+            {-px_3, -px_3, -px_3, px_3, px_3, px_3},
         },
         connect_top = {
-            {-px_1, px_3 - px_1, -px_1, px_1, 0.5 , px_1}
+            {-px_3, -0.25, -px_3, px_3, 0.5 , px_3}
+        },
+        connect_bottom = {
+            {-px_3, -0.5, -px_3, px_3, 0.25 , px_3}
         }
     },
-    connect_sides = { "top", "bottom" },
+    connect_sides = { "top", "bottom", },
     color = "#331101ff",
     visual_scale = 1.0,
     tiles = {"nut_1.png"},
@@ -382,9 +386,9 @@ minetest.register_node("moondark:noconut", {
     sunlight_propagates = true,
     walkable = false,
     buildable_to = false,
-    groups = {hand = 2, flammable = 1,--[[ falling_node = 1,attached_node=1,]] },
+    groups = {hand = 2, flammable = 1,falling_node = 1, attached_node=1,},
     after_place_node = function(pos, placer, itemstack)
-		minetest.set_node(pos, {name = "moondark:noconut", param2 = 1})
+		minetest.set_node(pos, {name = "moondark:noconut", param2 = 3})
 	end,
     drop = "moondark:noconut",
 })

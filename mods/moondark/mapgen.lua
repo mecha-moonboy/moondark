@@ -163,7 +163,7 @@ minetest.register_decoration({ name = "moondark:lowan_tree",
     sidelen = 23,
     place_offset_y = -2,
     noise_params = {
-        offset = 0.0,
+        offset = 0.001,
         scale = 0.1,
         spread = {x = 512, y = 512, z = 512},
         seed = 2,
@@ -171,8 +171,8 @@ minetest.register_decoration({ name = "moondark:lowan_tree",
         persist = 1
     },
     biomes = {"lowan_forest"},
-    y_max = 150,
-    y_min = 10,
+    --y_max = 150,
+    --y_min = 10,
     schematic = minetest.get_modpath("moondark").."/schematics/lowan_tree.mts",
     flags = "place_center_x, place_center_z",
     rotation = "random",
@@ -180,7 +180,7 @@ minetest.register_decoration({ name = "moondark:lowan_tree",
 
 minetest.register_decoration({ name = "moondark:sprute_tree",
     deco_type = "schematic",
-    place_on = {"moondark:snow"},
+    place_on = {"moondark:snow", "moondark:turf"},
     sidelen = 23,
     place_offset_y = -2,
     noise_params = {
@@ -201,7 +201,7 @@ minetest.register_decoration({ name = "moondark:sprute_tree",
 
 minetest.register_decoration({ name = "moondark:sprute_tree_dead",
     deco_type = "schematic",
-    place_on = {"moondark:snow"},
+    place_on = {"moondark:snow", "moondark:turf"},
     sidelen = 23,
     place_offset_y = -2,
     noise_params = {
@@ -245,11 +245,12 @@ minetest.register_decoration({ name = "moondark:malpa_tree",
 
 minetest.register_decoration({ name = "moondark:grass",
     deco_type = "simple",
-    place_on = {"moondark:turf"},
+    place_on = {"moondark:turf", "moondark:snow", "moondark:sand"},
+    biomes = {"beach", "snow_plains", "sprute_forest", "plains", "lowan_forest"},
     sidelen = 16,
     fill_ratio = 0.1,
-    y_max = 150,
-    y_min = 1,
+    y_max = 200,
+    y_min = 16,
     decoration = "moondark:grass",
 })
 
@@ -275,6 +276,7 @@ minetest.register_decoration({ name = "moondark:rock",
 minetest.register_decoration({ name = "moondark:driftwood",
     deco_type = "simple",
     place_on = {"moondark:sand"},
+    biomes = {"beach"},
     sidelen = 64,
     noise_params = {
         offset = 0.001,
@@ -297,7 +299,7 @@ minetest.register_decoration({ name = "moondark:boulder_small",
     sidelen = 64,
     noise_params = {
         offset = 0.001,
-        scale = 0.0005,
+        scale = 0.0003,
         spread = {x = 100, y = 100, z = 100},
         seed = 329,
         octaves = 1,
@@ -319,9 +321,83 @@ minetest.register_decoration({ name = "moondark:boulder_large",
         spread = {x = 100, y = 100, z = 100},
         seed = 329,
         octaves = 1,
-        persist = 0.3
+        persist = 0.25
     },
     place_offset_y = -3,
     schematic = minetest.get_modpath("moondark").."/schematics/boulder_large.mts",
+    rotation = "random"
+})
+
+minetest.register_decoration({ name = "moondark:lowan_log",
+    deco_type = "schematic",
+    biomes = {"lowan_forest"},
+    place_on = {"moondark:turf"},
+    sidelen = 64,
+    noise_params = {
+        offset = 0.001,
+        scale = 0.0001,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 1,
+        persist = 0.25
+    },
+    schematic = minetest.get_modpath("moondark").."/schematics/lowan_log.mts",
+    flags = "place_center_y, place_center_x, place_center_z,",
+    rotation = "random"
+})
+
+minetest.register_decoration({ name = "moondark:lowan_tree_fallen",
+    deco_type = "schematic",
+    biomes = {"lowan_forest"},
+    place_on = {"moondark:turf"},
+    sidelen = 64,
+    noise_params = {
+        offset = 0.001,
+        scale = 0.0001,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 1,
+        persist = 0.2
+    },
+    schematic = minetest.get_modpath("moondark").."/schematics/lowan_tree_fallen.mts",
+    place_offset_y = -1,
+    flags = "place_center_x, place_center_z",
+    rotation = "random"
+})
+
+minetest.register_decoration({ name = "moondark:sprute_log",
+    deco_type = "schematic",
+    biomes = {"sprute_forest"},
+    place_on = {"moondark:snow"},
+    sidelen = 64,
+    noise_params = {
+        offset = 0.001,
+        scale = 0.0001,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 1,
+        persist = 0.3
+    },
+    schematic = minetest.get_modpath("moondark").."/schematics/sprute_log.mts",
+    rotation = "random",
+    flags = " place_center_x, place_center_z",
+})
+
+minetest.register_decoration({ name = "moondark:sprute_tree_fallen",
+    deco_type = "schematic",
+    biomes = {"sprute_forest"},
+    place_on = {"moondark:snow"},
+    sidelen = 64,
+    noise_params = {
+        offset = 0.001,
+        scale = 0.0001,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 1,
+        persist = 0.2
+    },
+    schematic = minetest.get_modpath("moondark").."/schematics/sprute_tree_fallen.mts",
+    place_offset_y = -1,
+    flags = "place_center_x, place_center_z",
     rotation = "random"
 })
