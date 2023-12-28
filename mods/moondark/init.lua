@@ -68,6 +68,29 @@ minetest.register_on_joinplayer(function(player)
 	player:set_clouds({
 		height = 300
 	})
+
+	player:set_sky({
+		base_color = "#ff00ffff",
+		type = "regular",
+		clouds = true,
+		sky_color = {
+			day_sky = "#554488ff",
+			day_horizon = "#665599ff",
+			dawn_sky = "#7755aaff",
+			dawn_horizon = "#ff6622ff",
+			night_sky = "#000005ff",
+			night_horizon = "#050010ff",
+			indoors = "#111111ff",
+			fog_sun_tint = "#000000ff",
+			fog_moon_tint = "#444466ff",
+			fog_tint_type = "custom"
+		},
+		fog = {
+			fog_distance = 256,
+			fog_start = 64,
+		}
+
+	})
 end)
 
 moondark_core.path = minetest.get_modpath("moondark")

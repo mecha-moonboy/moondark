@@ -5,4 +5,8 @@ local modname = minetest.get_modpath("md_template_mod")
 --     -- do things when a map chunk is generated
 -- end)
 
+-- minetest.register_globalstep(function(dtime)
+--      -- do things every frame
+-- end)
+
 --dofile(modname .. "/api.lua")

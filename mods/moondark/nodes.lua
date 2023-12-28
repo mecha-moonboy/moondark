@@ -117,16 +117,28 @@ minetest.register_node("moondark:clay",{
     drops = {"moondark:clay_blob"},
 })
 
+minetest.register_node("moondark:darksilt",{
+    description = "darksilt",
+    tiles = {
+        "blank.png^[multiply:#110022ff^spots_sparse.png^[multiply:#00aa55ff" --^spots.png^[colorize:#ffffffff
+    },
+    --color = "#330022ff",
+    light_source = 2,
+    paramtype = "light",
+    --use_texture_alpha = "clip",
+    groups = {granular = 2},
+})
+
 -- Water
 minetest.register_node("moondark:water_source",{
     description = "water",
 
     drawtype = "liquid",
     tiles = {
-        "transparent_ground.png"
+        "blank.png^[multiply:#001c0911"
     },
     use_texture_alpha = "blend",
-    color = "#00003355",
+    color = "#001c09ff",
     paramtype = "light",
 
     walkable = false,
@@ -143,7 +155,7 @@ minetest.register_node("moondark:water_source",{
     liquid_viscosity = 1,
     liquid_renewable = false,
     liquid_range = 2,
-    post_effect_color = "#00003399",
+    post_effect_color = "#001c09cc",
 })
 minetest.register_node("moondark:water_flowing",{
     drawtype = "flowingliquid",
@@ -159,7 +171,7 @@ minetest.register_node("moondark:water_flowing",{
 		},
 	},
     use_texture_alpha = "blend",
-    color = "#00003355",
+    color = "#00112255",
     paramtype = "light",
 	paramtype2 = "flowingliquid",
 
@@ -178,7 +190,7 @@ minetest.register_node("moondark:water_flowing",{
     liquid_renewable = false,
     liquid_move_physics = 0,
     liquid_range = 2,
-    post_effect_color = "#00003399",
+    post_effect_color = "#00112255",
 })
 
 -- Trees
