@@ -22,5 +22,5 @@ minetest.register_craftitem("moondark:stick", {
 minetest.register_craftitem("moondark:clay_blob", {
     description = "clay blob",
     inventory_image = "blob.png",
-    color = "#777777ff"
+    color = "#333333ff"
 })

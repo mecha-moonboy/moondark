@@ -112,9 +112,9 @@ minetest.register_node("moondark:clay",{
     tiles = {
         "blank.png^ground.png"
     },
-    color = "#777777ff",
+    color = "#333333ff",
     groups = {hand = 2, granular = 2},
-    drops = {"moondark:clay_blob"},
+    drop = "moondark:clay_blob 3",
 })
 
 minetest.register_node("moondark:darksilt",{
@@ -135,12 +135,11 @@ minetest.register_node("moondark:water_source",{
 
     drawtype = "liquid",
     tiles = {
-        "blank.png^[multiply:#001c0911"
+        "blank.png^[opacity:220"
     },
     use_texture_alpha = "blend",
-    color = "#001c09ff",
+    color = "#001009ff",
     paramtype = "light",
-
     walkable = false,
     pointable = false,
     diggable = false,
@@ -155,23 +154,23 @@ minetest.register_node("moondark:water_source",{
     liquid_viscosity = 1,
     liquid_renewable = false,
     liquid_range = 2,
-    post_effect_color = "#001c09cc",
+    post_effect_color = "#001009dd",
 })
 minetest.register_node("moondark:water_flowing",{
     drawtype = "flowingliquid",
-    tiles = {"transparent_ground.png"},
+    tiles = {"blank.png"},
     special_tiles = {
 		{
-			name = "transparent_ground.png",
-			backface_culling = false,
+			name = "blank.png^[opacity:220",
+			backface_culling = true,
 		},
 		{
-			name = "transparent_ground.png",
+			name = "blank.png^[opacity:220",
 			backface_culling = true,
 		},
 	},
     use_texture_alpha = "blend",
-    color = "#00112255",
+    color = "#001009ff",
     paramtype = "light",
 	paramtype2 = "flowingliquid",
 
@@ -190,7 +189,7 @@ minetest.register_node("moondark:water_flowing",{
     liquid_renewable = false,
     liquid_move_physics = 0,
     liquid_range = 2,
-    post_effect_color = "#00112255",
+    post_effect_color = "#001009dd",
 })
 
 -- Trees
