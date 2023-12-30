@@ -220,7 +220,7 @@ function md_node_critters.register_critter(critter_def)
                 local light = minetest.get_node_light(pos)
                 if --[[light < critter_def.light - 1 or]] (time > critter_def.later_than or time < critter_def.earlier_than) then
                     minetest.set_node(pos, {name = "md_node_critters:"..critter_def.name})
-                    minetest.log("Turning on critter")
+                    --minetest.log("Turning on critter")
                 end
 
                 minetest.get_node_timer(pos):start(math.random(critter_def.min_time, critter_def.max_time))

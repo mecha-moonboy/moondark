@@ -26,3 +26,7 @@ md_node_critters.register_critter({
     --max_light = 8,
     catch_chance = 4, -- 1 in 4 chance of catching bug when punched
 })
+
+if minetest.get_modpath("wielded_light") then
+    wielded_light.register_item_light("moondark:midlight", 11, "")
+end

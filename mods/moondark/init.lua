@@ -66,18 +66,21 @@ minetest.register_on_joinplayer(function(player)
 			day_horizon = "#556699ff",
 			dawn_sky = "#7755aaff",
 			dawn_horizon = "#ff6622ff",
-			night_sky = "#000005ff",
-			night_horizon = "#050010ff",
+			night_sky = "#040477ff",
+			night_horizon = "#040499ff",
 			indoors = "#111111ff",
-			fog_sun_tint = "#000000ff",
-			fog_moon_tint = "#444466ff",
+			fog_sun_tint = "#00000000",
+			fog_moon_tint = "#00000000",
 			fog_tint_type = "custom"
 		},
 		fog = {
-			fog_distance = 256,
-			fog_start = 64,
+			fog_distance = 512,
+			fog_start = 0.1,
 		}
+	})
 
+	player:set_moon({
+		texture = "moon_0.png"
 	})
 end)
 

@@ -365,7 +365,7 @@ minetest.register_decoration({ name = "moondark:lowan_tree_fallen",
         spread = {x = 100, y = 100, z = 100},
         seed = 329,
         octaves = 1,
-        persist = 0.2
+        persist = 0.1
     },
     schematic = minetest.get_modpath("moondark").."/schematics/lowan_tree_fallen.mts",
     place_offset_y = -1,
@@ -403,7 +403,7 @@ minetest.register_decoration({ name = "moondark:sprute_tree_fallen",
         spread = {x = 100, y = 100, z = 100},
         seed = 276,
         octaves = 1,
-        persist = 0.1
+        persist = 0.05
     },
     schematic = minetest.get_modpath("moondark").."/schematics/sprute_tree_fallen.mts",
     place_offset_y = 0,
