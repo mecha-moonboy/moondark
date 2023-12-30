@@ -25,6 +25,20 @@ minetest.handle_node_drops = function(pos, drops, digger)
 	end
 end
 
+
+-- DEBUG
+function moondark_core.log(message, channel)
+	if not moondark_core.DEBUG then
+		return
+	end
+
+	if channel then
+		minetest.log(channel, message)
+	else
+		minetest.log(message)
+	end
+end
+
 -- Node Operations
 
 -- check if any of the 6 adjacent nodes are of a group and return a list

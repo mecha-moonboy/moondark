@@ -5,6 +5,7 @@ local S = minetest.get_translator("moondark")
 
 moondark_core = {}
 
+moondark_core.DEBUG = true
 moondark_core.LIGHT_MAX = 14
 moondark_core.get_translator = S
 
