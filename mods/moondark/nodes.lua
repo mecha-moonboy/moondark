@@ -104,7 +104,7 @@ minetest.register_node("moondark:snow",{
         "blank.png^ground.png"
     },
     color = "#9999ddff",
-    groups = {hand = 2, granular = 2},
+    groups = {hand = 2, granular = 2, soil = 1},
 })
 
 minetest.register_node("moondark:clay",{
