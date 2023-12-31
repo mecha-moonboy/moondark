@@ -27,6 +27,29 @@ function md_herbs.register_herb(name, herb_definition)
     md_herbs.registered_herbs[name] = herb_definition
 end
 
-function md_herbs.register_herb_ABMS()
+function md_herbs.attempt_place_herb(pos, node)
+    local total_weight = 0
+    for _, herb in ipairs(#md_herbs.registered_herbs) do
 
+    end
+end
+
+function md_herbs.register_herb_ABMS()
+    minetest.register_abm({
+        nodenames = {"group:soil"},
+        interval = 10.0,
+        -- Operation interval in seconds
+
+        chance = 1,
+        -- Chance of triggering `action` per-node per-interval is 1.0 / chance
+
+        min_y = 0,
+        max_y = 500,
+
+        catch_up = true, -- catch up after been absent from an area
+
+        action = function(pos, node)
+            md_herbs.attempt_place_herb(pos, node)
+        end,
+    })
 end
