@@ -78,7 +78,7 @@ end
 
 minetest.register_abm({
     nodenames = {"group:soil"},
-    interval = 10,
+    interval = 120,
     -- Operation interval in seconds
 
     chance = 250,

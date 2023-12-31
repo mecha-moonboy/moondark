@@ -125,13 +125,16 @@ Done:
 
 # Brainstorming #
 
-Theory:
+Feature wall:
     Farming:
         - crop growth timer and parameters
         - seasons
         - stages
         - harvesting
     Magic:
+        - action magic (attraction, repulsion)
+        - vibration magic (frequency, vibration)
+        -
         - potion brewing
         - herb gathering
         - ritual casting
@@ -150,6 +153,11 @@ Theory:
         - forging
         - quenching
         - finishing
+
+Theory:
+    - Using ABMs for resonance and vibration
+    - Node golems that move using node timers
+    - Geocentric astrology along outside of walls
 
 
 

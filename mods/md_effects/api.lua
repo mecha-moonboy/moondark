@@ -122,7 +122,7 @@ minetest.register_globalstep(function(dtime)
 		for player_name, eff_inst in pairs(player_list) do
 			--moondark_core.log("Effect: " .. effect_name)
 			--moondark_core.log("Player: " .. player_name)
-			minetest.log("Effect instance: " .. minetest.serialize(eff_inst))
+			--minetest.log("Effect instance: " .. minetest.serialize(eff_inst))
 			if not md_effects.active_effects[effect_name][player_name] then return end
 
 			local player = minetest.get_player_by_name(player_name)
@@ -158,7 +158,7 @@ minetest.register_globalstep(function(dtime)
 				-- timer for effect step
 				md_effects.active_effects[effect_name][player_name].timer2 = (md_effects.active_effects[effect_name][player_name].timer2 or 0) + dtime
 				if md_effects.active_effects[effect_name][player_name].timer2 >= step then
-					moondark_core.log("Executing on_step for " .. effect_name)
+					--moondark_core.log("Executing on_step for " .. effect_name)
 					effect.on_step(player)
 					md_effects.active_effects[effect_name][player_name].timer2 = 0
 				end
@@ -346,7 +346,7 @@ end
 -- called to add effects
 function md_effects.give_effect(player, effect_name, duration)
 	--if not effect then return end
-	moondark_core.log("Giving effect to player...")
+	--moondark_core.log("Giving effect to player...")
 
 	-- if there's no meta data on the player, exit...
     if not player:get_meta() then
@@ -367,21 +367,21 @@ function md_effects.give_effect(player, effect_name, duration)
 	end
 
     if not md_effects.active_effects[effect_name][player_name] then
-		moondark_core.log("Player did not have the effect before, now they do...")
+		--moondark_core.log("Player did not have the effect before, now they do...")
 
         -- add the player as key and a table as value
 		md_effects.active_effects[effect_name][player_name] = {duration = duration, timer = 0, timer2 = 0}
 		if effect.start_func then
-			moondark_core.log("Calling the start function of the effect...")
+			--moondark_core.log("Calling the start function of the effect...")
 			effect.start_func(minetest.get_player_by_name(player_name))
 		end
 	else -- player was on the list, so instead
-		moondark_core.log("Player did have the effect before...")
+		--moondark_core.log("Player did have the effect before...")
 
 		local victim = md_effects.active_effects[effect_name][player_name]
 
 		if effect.start_func then
-			moondark_core.log("Calling the start function of the effect...")
+			--moondark_core.log("Calling the start function of the effect...")
 				effect.start_func(minetest.get_player_by_name(player_name))
 		end
 
