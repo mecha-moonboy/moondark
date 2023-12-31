@@ -88,6 +88,8 @@ Done:
     - Health and Breath Rework
     - Hotbar Retexture (not final)
     Mechanical/Features:
+    - Status Effects API
+    - Herb API
     - Nodes:
         - Stone
         - Water
@@ -101,10 +103,6 @@ Done:
         - Lowan Log, Leaves, Wood
         - Malpa Log, Leaves(advanced), Wood
         - Midlights
-    - Status Effects: [textures, HUD]
-        - Quick
-        - Weightless
-        - Restoration
     - Misc:
         - Leaves decay when broken - U
     - Node Critters:
@@ -125,19 +123,43 @@ Done:
         - stone axe, pickaxe, and machete
         - digging tool
 
+# Brainstorming #
+
 Theory:
     Farming:
         - crop growth timer and parameters
-        - harvesting, stages, and drops
+        - seasons
+        - stages
+        - harvesting
+    Magic:
+        - potion brewing
+        - herb gathering
+        - ritual casting
+        - instruments
+        - astrology
+        - disaster cycle
+        - prevent disaster
+        - druidry
+        - wizardry
+        - sorcery
+        - geomancy
+        - golemancy
+    Smithing:
+        - smelting
+        - casting
+        - forging
+        - quenching
+        - finishing
+
 
 
 LEGEND:
-PU - Potentially Unstable
-VU - Very Unstable
-U - Unstable
-  - Stable (hopefully)
-E - Experimental
-NA:### - Needs Adjusting: Issue ID:###
+        - Stable (hopefully)
+E       - Experimental
+PU      - Potentially Unstable
+U       - Unstable
+VU      - Very Unstable
+NA:###  - Needs Adjusting: Issue ID:###
 
 Issues:
     000 midlight_off and all "off" node critters have a collider
