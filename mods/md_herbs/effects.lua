@@ -1,5 +1,5 @@
-md_effects.register_effect("md_consumables:thrumberry_effect", {
-    name = "md_consumables:thrumberry_effect",
+md_effects.register_effect("md_herbs:thrumberry_effect", {
+    name = "md_herbs:thrumberry_effect",
     meta_tag = "_thrumberry",
     particle_color = "#447711ff",
     particle_texture = "plus.png",
@@ -11,10 +11,10 @@ md_effects.register_effect("md_consumables:thrumberry_effect", {
 })
 
 -- straw berry
-md_effects.register_effect("md_consumables:brawsterry_effect", {
-    name = "md_consumables:brawsterry_effect",
+md_effects.register_effect("md_herbs:brawsterry_effect", {
+    name = "md_herbs:brawsterry_effect",
     meta_tag = "_brawsterry",
     particle_color = "#aa2211ff",
     particle_texture = "plus.png",
-    physics_override = {attribute = "speed", id = "md_consumables:brawsterry_effect", factor = 2}
+    physics_override = {attribute = "speed", id = "md_herbs:brawsterry_effect", factor = 2}
 })

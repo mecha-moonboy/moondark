@@ -182,6 +182,7 @@ function md_node_critters.register_critter(critter_def)
         light_source = critter_def.light,
         paramtype = "light",
         drops = "md_node_critters:" .. critter_def.name,
+        floodable = true,
         on_punch = function(pos)
             --minetest.log("critter was punched")
             if math.random(1, critter_def.catch_chance) == 1 then

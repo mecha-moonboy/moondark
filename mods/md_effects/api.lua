@@ -345,6 +345,7 @@ end
 
 -- called to add effects
 function md_effects.give_effect(player, effect_name, duration)
+	--if not effect then return end
 	moondark_core.log("Giving effect to player...")
 
 	-- if there's no meta data on the player, exit...
@@ -447,8 +448,9 @@ function md_effects.return_on_use(consumable_def)
         elseif pointed_thing.type == "object" then -- abort if another object
             return itemstack
         end
-
-        consumable_def.on_use(itemstack, user, pointed_thing)
+		if consumable_def.on_consume then
+			consumable_def.on_consume(user)
+		end
 
         -- local old_name, old_count = itemstack:get_name(), itemstack:get_count()
         itemstack = minetest.do_item_eat(0, "", itemstack, user, pointed_thing)
@@ -462,14 +464,14 @@ end
 
 function md_effects.register_consumable(name, consumable_def)
 
-    -- local on_use = nil
-    -- --local eff = md_effects.registered_effects[consumable_def.effect_name]
-    -- if consumable_def then
-    --     on_use = md_effects.return_on_use(consumable_def)
-    -- end
+    local on_use = nil
+    --local eff = md_effects.registered_effects[consumable_def.effect_name]
+    if consumable_def then
+        on_use = md_effects.return_on_use(consumable_def)
+    end
 
-    -- consumable_def.on_use = on_use
-    consumable_def.on_secondary_use = consumable_def.on_use
+    consumable_def.on_use = on_use
+    consumable_def.on_secondary_use = on_use
 
     minetest.register_craftitem(name, consumable_def)
 end
