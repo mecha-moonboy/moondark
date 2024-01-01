@@ -33,4 +33,4 @@ The Minetest engine can be found at [GitHub](https://github.com/minetest/minetes
 
 ## Licensing
 
-See `LICENSE.txt`
+See `LICENSE`
