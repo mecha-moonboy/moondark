@@ -48,7 +48,7 @@ local item = {
 					return
 				end
 				if node then
-					minetest.log("Current node is ".. node.name)
+					--minetest.log("Current node is ".. node.name)
 					if minetest.get_node_group(node.name, "fire") ~= 0 then
 						self.heat(self, node.name)
 					end

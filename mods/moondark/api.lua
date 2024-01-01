@@ -44,13 +44,26 @@ end
 -- check if any of the 6 adjacent nodes are of a group and return a list
 function moondark_core.get_surrounding_nodes_of_group(pos, group)
 	local pos_list = {
-		pos:offset(0, 1, 0), -- up
-		pos:offset(0, -1, 0), -- down
-		pos:offset(0, 0, 1), -- front
-		pos:offset(0, 0, -1), -- back
-		pos:offset(1, 0, 0), -- east
+		pos:offset( 0, 1, 0), -- up
+		pos:offset( 0,-1, 0), -- down
+		pos:offset( 0, 0, 1), -- front
+		pos:offset( 0, 0,-1), -- back
+		pos:offset( 1, 0, 0), -- east
 		pos:offset(-1, 0, 0), -- west
 	}
+	local ret_list = {}
+	for _, pos in ipairs(pos_list) do
+		if minetest.get_node_group(minetest.get_node(pos).name, group) ~= 0 then
+			table.insert(ret_list, pos)
+		end
+	end
+
+	return ret_list
+end
+
+-- check if any of the 6 adjacent nodes are of a group and return a list
+function moondark_core.get_nodes_of_group_from_26(pos, group)
+	local pos_list = moondark_core.get_26_around(pos)
 	local ret_list = {}
 	for _, pos in ipairs(pos_list) do
 		if minetest.get_node_group(minetest.get_node(pos).name, group) ~= 0 then
@@ -73,6 +86,23 @@ function moondark_core.random_pos_around_pos(pos)
 	}
 
 	return pos_list[math.random(1, #pos_list)]
+end
+
+function moondark_core.get_26_around(pos)
+	local pos_list = {}
+
+	for xp = 1, 3, 1 do
+		for yp = 1, 3, 1 do
+			for zp = 1, 3, 1 do
+				if xp == 0 and yp == 0 and zp == 0 then
+					break
+				end
+				table.insert(pos_list, #pos_list, pos:offset(xp - 2, yp - 2, zp - 2))
+			end
+		end
+	end
+
+	return pos_list
 end
 
 function moondark_core.random_from_26(pos)
@@ -98,11 +128,6 @@ function moondark_core.simple_destroy_node(pos, toolname)
 	local drops = minetest.get_node_drops(node, toolname)
 	minetest.handle_node_drops(pos, drops)
 	minetest.remove_node(pos)
-end
-
--- attempt to eat a held item
-function moondark_core.attempt_eat()
-
 end
 
 -- Tree Functions

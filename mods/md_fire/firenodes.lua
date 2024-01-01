@@ -16,6 +16,7 @@ md_fire.register_fire_node({
     },
     damage = 1,
     tick_length = 5,
+    tick_variance = 3,
     hotter_fire = "md_fire:fire_2",
     cooler_fire = "air"
 })
@@ -38,6 +39,7 @@ md_fire.register_fire_node({
     },
     damage = 1,
     tick_length = 5,
+    tick_variance = 3,
     --hotter_fire = "fire_3",
     cooler_fire = "md_fire:fire_1",
 })
