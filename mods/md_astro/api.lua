@@ -99,6 +99,7 @@ function md_astro.set_player_sun(player)
         phase = "winter"
     end
 
+    if not phase then return end
     player:set_sun({
         texture = "sun_" .. phase .. ".png"
     })
