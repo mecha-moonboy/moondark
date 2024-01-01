@@ -257,7 +257,8 @@ minetest.register_node("moondark:lowan_leaves", {
         if not digger then
             return
         end
-        if minetest.get_item_group(digger:get_wielded_item(), "sword") then
+        --moondark_core.log("Digger was holding a: " .. dump(digger:get_wielded_item()))
+        if minetest.get_item_group(digger:get_wielded_item(), "sword") ~= 0 then
             for x = -2, 2, 1 do
                 for y = -2, 2, 1 do
                     for z = -2, 2, 1 do

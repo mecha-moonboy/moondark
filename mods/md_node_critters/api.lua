@@ -210,6 +210,8 @@ function md_node_critters.register_critter(critter_def)
             description = critter_def.name,
             tiles = {"blank.png"},
             drawtype = "airlike",
+            pointable = false,
+            sunlight_propagates = true,
             groups = {not_in_creative_inventory = 1},
             on_construct = function(pos)
                 -- start node timer
