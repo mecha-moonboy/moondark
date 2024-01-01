@@ -134,19 +134,27 @@ Feature wall:
     Magic:
         - action magic (attraction, repulsion)
         - vibration magic (frequency, vibration)
-        -
+
         - potion brewing
         - herb gathering
+        - druidry
         - ritual casting
+
         - instruments
         - astrology
         - disaster cycle
         - prevent disaster
-        - druidry
+
         - wizardry
+        - artifice
+
         - sorcery
+        - enchantment
+
         - geomancy
+
         - golemancy
+
     Smithing:
         - smelting
         - casting
