@@ -577,7 +577,7 @@ function wielded_light.track_item_entity(obj, cat, item)
 end
 
 -- A player's light should appear near their head not their feet
-local player_height_offset = { x=0, y=1, z=0 }
+local player_height_offset = { x=0, y=0, z=0 }
 
 -- Keep track of a user / player entity. Should be called as often as the user updates
 function wielded_light.track_user_entity(obj, cat, item)

@@ -14,6 +14,9 @@ In Progress:
 Pending Completion:
 
 To Do:
+    - Critter net
+    - Automatic critter spawning
+    - Door
     Immediate:
         - ice
         - hand loom -> cloth -> basket
