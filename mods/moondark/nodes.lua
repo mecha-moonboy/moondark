@@ -57,6 +57,8 @@ minetest.register_node("moondark:ice",{
     },
     color = "#ddddffff",
     use_texture_alpha = "blend",
+    sunlight_propagates = true,
+    paramtype = "light",
     groups = {stone = 4},
 })
 -- Grainy

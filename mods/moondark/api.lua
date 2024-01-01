@@ -75,6 +75,24 @@ function moondark_core.random_pos_around_pos(pos)
 	return pos_list[math.random(1, #pos_list)]
 end
 
+function moondark_core.random_from_26(pos)
+	local pos_list = {}
+
+	for xp = 1, 3, 1 do
+		for yp = 1, 3, 1 do
+			for zp = 1, 3, 1 do
+				if xp == 0 and yp == 0 and zp == 0 then
+					break
+				end
+
+				table.insert(pos_list, #pos_list, vector.new(xp, yp, zp))
+			end
+		end
+	end
+
+	return pos_list[math.random(1, #pos_list)]
+end
+
 function moondark_core.simple_destroy_node(pos, toolname)
 	local node = minetest.get_node(pos)
 	local drops = minetest.get_node_drops(node, toolname)
