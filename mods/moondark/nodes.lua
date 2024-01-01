@@ -1,35 +1,42 @@
 --[[
 Breaking/Using Groups:
-- hand
-- stone [pickaxe]
-- soil [shovel]
-- wooden [axe]
-- fiberous [blade]
-- heated [tongs]
+    - hand
+    - stone [pickaxe]
+    - granular [shovel]
+    - wooden [axe]
+    - fiberous [blade]
+    - heated [tongs]
 
 Node Type Groups:
-- liquid
-- falling_node
-
+    - liquid
+    - falling_node
+    - soil
 
 Ground Nodes:
-
-moondark:stone
-moondark:water
-moondark:turf
-moondark:dirt
-moondark:snow
-moondark:clay
+    moondark:stone
+    moondark:water
+    moondark:turf
+    moondark:dirt
+    moondark:snow
+    moondark:clay
 
 Tree Nodes:
 
-moondark:lowan_log
-moondark:lowan_leaves
-moondark:lowan_wood
+    moondark:lowan_log
+    moondark:lowan_leaves
+    moondark:lowan_wood
+
+    moondark:malpa_log
+    moondark:malpa_leaves
+    moondark:malpa_wood
+
+    moondark:sprute_log
+    moondark:sprute_leaves
+    moondark:sprute_wood
 
 Plant and Decor Nodes:
-moondark:grass
-moondark:rock
+    moondark:grass
+    moondark:rock
 ]]
 
 -- Stone
@@ -42,11 +49,23 @@ minetest.register_node("moondark:stone",{
     groups = {stone = 4},
 })
 
+minetest.register_node("moondark:ice",{
+    description = "ice",
+    drawtype = "glasslike",
+    tiles = {
+        "blank.png^[multiply:#9999ffff^[opacity:200^diagonal_stripes_broken.png^[opacity:200"
+    },
+    color = "#ddddffff",
+    use_texture_alpha = "blend",
+    groups = {stone = 4},
+})
 -- Grainy
+
 minetest.register_node("moondark:turf",{
     description = "turf",
     tiles = {
-        "blank.png^ground.png"
+        {name = "blank.png^ground.png"},
+
     },
     color = "#002000ff",
     groups = {hand = 3, soil = 1, granular = 2},
@@ -75,7 +94,7 @@ minetest.register_node("moondark:sand",{
         "blank.png^ground.png"
     },
     color = "#664411ff",
-    groups = {hand = 2,granular = 2, falling_node = 1},
+    groups = {hand = 2, granular = 2, falling_node = 1},
     is_ground_content = true,
 })
 
@@ -84,8 +103,8 @@ minetest.register_node("moondark:snow",{
     tiles = {
         "blank.png^ground.png"
     },
-    color = "#ddddffdd",
-    groups = {hand = 2, granular = 2},
+    color = "#9999ddff",
+    groups = {hand = 2, granular = 2, soil = 1},
 })
 
 minetest.register_node("moondark:clay",{
@@ -93,9 +112,21 @@ minetest.register_node("moondark:clay",{
     tiles = {
         "blank.png^ground.png"
     },
-    color = "#777777ff",
+    color = "#333333ff",
     groups = {hand = 2, granular = 2},
-    drops = {"moondark:clay_blob"},
+    drop = "moondark:clay_blob 3",
+})
+
+minetest.register_node("moondark:darksilt",{
+    description = "darksilt",
+    tiles = {
+        "blank.png^[multiply:#110022ff^spots_sparse.png^[multiply:#00aa55ff" --^spots.png^[colorize:#ffffffff
+    },
+    --color = "#330022ff",
+    light_source = 2,
+    paramtype = "light",
+    --use_texture_alpha = "clip",
+    groups = {granular = 2},
 })
 
 -- Water
@@ -104,12 +135,11 @@ minetest.register_node("moondark:water_source",{
 
     drawtype = "liquid",
     tiles = {
-        "transparent_ground.png"
+        "blank.png^[opacity:220"
     },
     use_texture_alpha = "blend",
-    color = "#00003355",
+    color = "#001009ff",
     paramtype = "light",
-
     walkable = false,
     pointable = false,
     diggable = false,
@@ -124,23 +154,23 @@ minetest.register_node("moondark:water_source",{
     liquid_viscosity = 1,
     liquid_renewable = false,
     liquid_range = 2,
-    post_effect_color = "#00003399",
+    post_effect_color = "#001009dd",
 })
 minetest.register_node("moondark:water_flowing",{
     drawtype = "flowingliquid",
-    tiles = {"transparent_ground.png"},
+    tiles = {"blank.png"},
     special_tiles = {
 		{
-			name = "transparent_ground.png",
-			backface_culling = false,
+			name = "blank.png^[opacity:220",
+			backface_culling = true,
 		},
 		{
-			name = "transparent_ground.png",
+			name = "blank.png^[opacity:220",
 			backface_culling = true,
 		},
 	},
     use_texture_alpha = "blend",
-    color = "#00003355",
+    color = "#001009ff",
     paramtype = "light",
 	paramtype2 = "flowingliquid",
 
@@ -159,11 +189,10 @@ minetest.register_node("moondark:water_flowing",{
     liquid_renewable = false,
     liquid_move_physics = 0,
     liquid_range = 2,
-    post_effect_color = "#00003399",
+    post_effect_color = "#001009dd",
 })
 
 -- Trees
--- Lowan
 minetest.register_node("moondark:lowan_log", {
     description = "lowan log",
     tiles = {
@@ -181,7 +210,7 @@ minetest.register_node("moondark:lowan_log", {
     end,
     is_ground_content = false,
     color = "#552205ff",
-    groups = {wooden = 2, log = 1, flammable = 1},
+    groups = {wooden = 2, log = 1},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:lowan_wood 4", 8, "axe")
     end
@@ -196,7 +225,7 @@ minetest.register_node("moondark:lowan_wood", {
     --paramtype2 = "facedir",
     --on_place = minetest.rotate_node,
     color = "#552205ff",
-    groups = {planks = 2, flammable = 1},
+    groups = {planks = 2},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
     end
@@ -209,7 +238,7 @@ minetest.register_node("moondark:lowan_leaves", {
     },
     drawtype = "allfaces_optional",
     color = "#002207ff",
-    groups = {hand = 2, fiberous = 1, leaves = 1, flammable = 1},
+    groups = {hand = 2, fiberous = 1, leaves = 1,},
     drop = {
         max_item = 1,
         items = {
@@ -228,7 +257,8 @@ minetest.register_node("moondark:lowan_leaves", {
         if not digger then
             return
         end
-        if minetest.get_item_group(digger:get_wielded_item(), "sword") then
+        --moondark_core.log("Digger was holding a: " .. dump(digger:get_wielded_item()))
+        if minetest.get_item_group(digger:get_wielded_item(), "sword") ~= 0 then
             for x = -2, 2, 1 do
                 for y = -2, 2, 1 do
                     for z = -2, 2, 1 do
@@ -260,7 +290,7 @@ minetest.register_node("moondark:lowan_seedling", {
     sunlight_propagates = true,
     walkable = false,
     buildable_to = true,
-    groups = {hand = 2, flora = 1, attached_node = 1, grass = 1, flammable = 1},
+    groups = {hand = 2, flora = 1, attached_node = 1, grass = 1},
     selection_box = {
         type = "fixed",
         fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
@@ -272,7 +302,7 @@ minetest.register_node("moondark:lowan_seedling", {
     on_timer = moondark_core.grow_sapling,
 })
 
--- Malpa
+
 minetest.register_node("moondark:malpa_log", {
     description = "malpa log",
     tiles = {
@@ -290,7 +320,7 @@ minetest.register_node("moondark:malpa_log", {
     end,
     is_ground_content = false,
     color = "#776622ff",
-    groups = {wooden = 2, log = 1, flammable = 2},
+    groups = {wooden = 2, log = 1},
     -- on_punch = function(pos, node, clicker, _)
     --     return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:lowan_wood 4", 8, "axe")
     -- end
@@ -305,7 +335,7 @@ minetest.register_node("moondark:malpa_wood", {
     --paramtype2 = "facedir",
     --on_place = minetest.rotate_node,
     color = "#776622ff",
-    groups = {planks = 2, flammable = 2},
+    groups = {planks = 2},
     on_punch = function(pos, node, clicker, _)
         return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
     end
@@ -320,7 +350,7 @@ minetest.register_node("moondark:malpa_leaves", {
     mesh = "all_faces.obj",
     color = "#062705ff",
     use_texture_alpha = "clip",
-    groups = {hand = 2, fiberous = 1, leaves = 1, flammable = 1},
+    groups = {hand = 2, fiberous = 1, leaves = 1},
     selection_box = {
         type = "fixed",
         fixed = {
@@ -358,6 +388,7 @@ minetest.register_node("moondark:malpa_leaves", {
 	sunlight_propagates = true,
 })
 local px_3 = 0.5*3/4
+local px_2 = 0.25
 local px_1 = 0.5/4
 minetest.register_node("moondark:noconut", {
     description = "noconut",
@@ -365,13 +396,16 @@ minetest.register_node("moondark:noconut", {
     node_box = {
         type = "connected",
         fixed = {
-            {-px_3, -px_3 - px_1, -px_3, px_3, px_3 - px_1, px_3},
+            {-px_3, -px_3, -px_3, px_3, px_3, px_3},
         },
         connect_top = {
-            {-px_1, px_3 - px_1, -px_1, px_1, 0.5 , px_1}
+            {-px_3, -0.25, -px_3, px_3, 0.5 , px_3}
+        },
+        connect_bottom = {
+            {-px_3, -0.5, -px_3, px_3, 0.25 , px_3}
         }
     },
-    connect_sides = { "top", "bottom" },
+    connect_sides = { "top", "bottom", },
     color = "#331101ff",
     visual_scale = 1.0,
     tiles = {"nut_1.png"},
@@ -381,12 +415,121 @@ minetest.register_node("moondark:noconut", {
     sunlight_propagates = true,
     walkable = false,
     buildable_to = false,
-    groups = {hand = 2,--[[ falling_node = 1,attached_node=1,]] },
+    groups = {hand = 2, flammable = 1,falling_node = 1, attached_node=1,},
     after_place_node = function(pos, placer, itemstack)
-		minetest.set_node(pos, {name = "moondark:noconut", param2 = 1})
+		minetest.set_node(pos, {name = "moondark:noconut", param2 = 3})
 	end,
     drop = "moondark:noconut",
 })
+
+
+minetest.register_node("moondark:sprute_log", {
+    description = "sprute log",
+    tiles = {
+        "stem_top.png",
+        "stem_top.png",
+        "stem_side.png^[colorize:#332415cc",
+    },
+    drawtype = "normal",
+    paramtype2 = "facedir",
+    on_place = minetest.rotate_node,
+    after_destruct = function(pos, oldnode)
+        moondark_core.start_decay(pos)
+        -- check surrounding log nodes
+
+    end,
+    is_ground_content = false,
+    color = "#554415ff",
+    groups = {wooden = 2, log = 1},
+    on_punch = function(pos, node, clicker, _)
+        return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:sprute_wood 4", 8, "axe")
+    end
+})
+
+minetest.register_node("moondark:sprute_wood", {
+    description = "sprute planks",
+    tiles = {
+        "planks.png",
+    },
+    drawtype = "normal",
+    --paramtype2 = "facedir",
+    --on_place = minetest.rotate_node,
+    color = "#554415ff",
+    groups = {planks = 2},
+    on_punch = function(pos, node, clicker, _)
+        return moondark_core.pummel_attempt_drop(pos, clicker, "moondark:stick 4", 8, "axe")
+    end
+})
+
+minetest.register_node("moondark:sprute_needles", {
+    description = "sprute needles",
+    tiles = {
+        "needles_side.png"
+    },
+    drawtype = "allfaces_optional",
+    color = "#002211ff",
+    groups = {hand = 2, fiberous = 1, leaves = 1,},
+    drop = {
+        max_item = 1,
+        items = {
+            --{items = {"moondark:lowan_seedling"}, rarity = 8},
+            {items = {"moondark:stick"}, rarity = 4},
+        }
+    },
+    paramtype = "light",
+	walkable = false,
+	climbable = true,
+    buildable_to = false,
+    -- after_destruct = function(pos, oldnode)
+    --     moondark_core.start_decay(pos)
+    -- end,
+    after_dig_node = function(pos, oldnode, oldmetadata, digger)
+        if not digger then
+            return
+        end
+        if minetest.get_item_group(digger:get_wielded_item(), "sword") then
+            for x = -2, 2, 1 do
+                for y = -2, 2, 1 do
+                    for z = -2, 2, 1 do
+                        local pos_offset = pos:offset(x, y, z)
+                        if minetest.get_node(pos_offset).name == oldnode.name then
+                            moondark_core.simple_destroy_node(pos_offset, "sword")
+                        end
+                    end
+                end
+            end
+        end
+    end,
+    on_timer = function(pos, elapsed)
+        moondark_core.start_decay(pos)
+    end
+	--sunlight_propagates = true,
+})
+
+-- minetest.register_node("moondark:sprute_seedling", {
+--     description = "acorn",
+--     drawtype = "plantlike",
+--     color = "#104400ff",
+--     waving = 1,
+--     visual_scale = 1.0,
+--     tiles = {"seedling.png"},
+--     inventory_image = "acorn.png",
+--     wield_image = "acorn.png",
+--     paramtype = "light",
+--     sunlight_propagates = true,
+--     walkable = false,
+--     buildable_to = true,
+--     groups = {hand = 2, flora = 1, attached_node = 1, grass = 1},
+--     selection_box = {
+--         type = "fixed",
+--         fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
+--     },
+--     drop = "moondark:oak_seedling",
+--     on_construct = function(pos)
+--         minetest.get_node_timer(pos):start(math.random(3, 15))
+--     end,
+--     on_timer = moondark_core.grow_sapling,
+-- })
 
 -- Plants
 minetest.register_node("moondark:grass", {
@@ -402,7 +545,7 @@ minetest.register_node("moondark:grass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
-	groups = {hand = 2, fiberous = 1, flora = 1, flammable = 1, attached_node = 1, grass = 1, flammable = 1},
+	groups = {hand = 2, fiberous = 1, flora = 1, attached_node = 1, grass = 1},
 	selection_box = {
 		type = "fixed",
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
@@ -448,6 +591,6 @@ minetest.register_node("moondark:driftwood", {
         }
     },
     color = "#887755ff",
-    groups = {not_in_creative_inventory = 1, hand = 2, flammable = 2},
+    groups = {not_in_creative_inventory = 1, hand = 2},
     drop = "moondark:stick",
 })

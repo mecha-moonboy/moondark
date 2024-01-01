@@ -182,6 +182,7 @@ function md_node_critters.register_critter(critter_def)
         light_source = critter_def.light,
         paramtype = "light",
         drops = "md_node_critters:" .. critter_def.name,
+        floodable = true,
         on_punch = function(pos)
             --minetest.log("critter was punched")
             if math.random(1, critter_def.catch_chance) == 1 then
@@ -209,6 +210,8 @@ function md_node_critters.register_critter(critter_def)
             description = critter_def.name,
             tiles = {"blank.png"},
             drawtype = "airlike",
+            pointable = false,
+            sunlight_propagates = true,
             groups = {not_in_creative_inventory = 1},
             on_construct = function(pos)
                 -- start node timer
@@ -220,7 +223,7 @@ function md_node_critters.register_critter(critter_def)
                 local light = minetest.get_node_light(pos)
                 if --[[light < critter_def.light - 1 or]] (time > critter_def.later_than or time < critter_def.earlier_than) then
                     minetest.set_node(pos, {name = "md_node_critters:"..critter_def.name})
-                    minetest.log("Turning on critter")
+                    --minetest.log("Turning on critter")
                 end
 
                 minetest.get_node_timer(pos):start(math.random(critter_def.min_time, critter_def.max_time))

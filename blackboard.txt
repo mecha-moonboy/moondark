@@ -1,6 +1,7 @@
 In Progress:
     - everything
     - fire -> charcoal
+    - hand loom -> cloth -> curtain
     - apsen bark + cord + charcoal = notebook
     - farming [0/10] - theorize farming system
         - Irrigation
@@ -11,24 +12,28 @@ In Progress:
     - food eating [1/10] - cooldown?
 
 Pending Completion:
-    - midlights [9/10] - PU
 
 To Do:
     Immediate:
+        - ice
         - hand loom -> cloth -> basket
         - fix hidden midlight collision
         - armor/accessories:
             - footwear (speed boost, fall resistance factor)
-        -
+            - clothing (cold resistance, slight armor bonus)
 
     Bugfixes:
 
     Progression/Mechanics:
         - Mob API
-        - Farm pests
+        - Predators and prey
         - Wanderers - NPCs, have a rapport system and can do menial tasks
 
+        - Farm pests
+
         - Sanom - fish
+
+        - Traps
 
         - Fire
         - Crucible
@@ -41,6 +46,9 @@ To Do:
         - Add status effect HUD markers
 
     Biomes:
+        - desert
+        - swamp
+        - snow forest
         - rocky desert (stones, perhaps some snow, sparse bushes, flat)
         - rocky plains (large boulders, snow, sparse trees and bushes)
         - ancient redwoods
@@ -69,9 +77,10 @@ To Do:
         - creepers - vine
 
     Node Critters:
-        - snairls
-        - ribbid
-        - serpin
+        - snairls - snail
+        - ribbid - frog
+        - serpin - snek
+        - malc - clam
 
 
 Done:
@@ -79,6 +88,8 @@ Done:
     - Health and Breath Rework
     - Hotbar Retexture (not final)
     Mechanical/Features:
+    - Status Effects API
+    - Herb API
     - Nodes:
         - Stone
         - Water
@@ -91,10 +102,7 @@ Done:
         - Grass
         - Lowan Log, Leaves, Wood
         - Malpa Log, Leaves(advanced), Wood
-    - Status Effects: [textures, HUD]
-        - Quick
-        - Weightless
-        - Restoration
+        - Midlights
     - Misc:
         - Leaves decay when broken - U
     - Node Critters:
@@ -115,18 +123,59 @@ Done:
         - stone axe, pickaxe, and machete
         - digging tool
 
-Farming:
-    - crop growth timer and parameters
-    - harvesting, stages, and drops
+# Brainstorming #
+
+Feature wall:
+    Farming:
+        - crop growth timer and parameters
+        - seasons
+        - stages
+        - harvesting
+    Magic:
+        - action magic (attraction, repulsion)
+        - vibration magic (frequency, vibration)
+
+        - potion brewing
+        - herb gathering
+        - druidry
+        - ritual casting
+
+        - instruments
+        - astrology
+        - disaster cycle
+        - prevent disaster
+
+        - wizardry
+        - artifice
+
+        - sorcery
+        - enchantment
+
+        - geomancy
+
+        - golemancy
+
+    Smithing:
+        - smelting
+        - casting
+        - forging
+        - quenching
+        - finishing
+
+Theory:
+    - Using ABMs for resonance and vibration
+    - Node golems that move using node timers
+    - Geocentric astrology along outside of walls
+
 
 
 LEGEND:
-PU - Potentially Unstable
-VU - Very Unstable
-U - Unstable
-  - Stable
-E - Experimental
-NA:### - Needs Adjusting: Issue ID:###
+        - Stable (hopefully)
+E       - Experimental
+PU      - Potentially Unstable
+U       - Unstable
+VU      - Very Unstable
+NA:###  - Needs Adjusting: Issue ID:###
 
 Issues:
     000 midlight_off and all "off" node critters have a collider

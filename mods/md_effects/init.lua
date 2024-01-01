@@ -6,5 +6,4 @@ md_effects = {}
 md_effects.LEVEL_FACTOR = 1.5
 md_effects.DURATION = 1
 
-dofile(modpath .. "/functions.lua")
-dofile(modpath .. "/effects.lua")
+dofile(modpath .. "/api.lua")

@@ -25,6 +25,56 @@ minetest.handle_node_drops = function(pos, drops, digger)
 	end
 end
 
+
+-- DEBUG
+function moondark_core.log(message, channel)
+	if not moondark_core.DEBUG then
+		return
+	end
+
+	if channel then
+		minetest.log(channel, message)
+	else
+		minetest.log(message)
+	end
+end
+
+-- Node Operations
+
+-- check if any of the 6 adjacent nodes are of a group and return a list
+function moondark_core.get_surrounding_nodes_of_group(pos, group)
+	local pos_list = {
+		pos:offset(0, 1, 0), -- up
+		pos:offset(0, -1, 0), -- down
+		pos:offset(0, 0, 1), -- front
+		pos:offset(0, 0, -1), -- back
+		pos:offset(1, 0, 0), -- east
+		pos:offset(-1, 0, 0), -- west
+	}
+	local ret_list = {}
+	for _, pos in ipairs(pos_list) do
+		if minetest.get_node_group(minetest.get_node(pos).name, group) ~= 0 then
+			table.insert(ret_list, pos)
+		end
+	end
+
+	return ret_list
+end
+
+-- choose any of 6 positions around another position
+function moondark_core.random_pos_around_pos(pos)
+	local pos_list = {
+		pos:offset(0, 1, 0), -- up
+		pos:offset(0, -1, 0), -- down
+		pos:offset(0, 0, 1), -- front
+		pos:offset(0, 0, -1), -- back
+		pos:offset(1, 0, 0), -- east
+		pos:offset(-1, 0, 0), -- west
+	}
+
+	return pos_list[math.random(1, #pos_list)]
+end
+
 function moondark_core.simple_destroy_node(pos, toolname)
 	local node = minetest.get_node(pos)
 	local drops = minetest.get_node_drops(node, toolname)
