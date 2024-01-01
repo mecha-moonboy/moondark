@@ -8,16 +8,7 @@ local modname = minetest.get_modpath("md_astro")
 minetest.register_on_joinplayer(function(player)
     md_astro.set_player_moon(player)
     md_astro.set_player_sun(player)
-end)
-
-minetest.register_on_shutdown(function()
-    md_astro.save_state()
-end)
-
-local sun_moon_scale = 1
-
-minetest.register_on_joinplayer(function(player)
-    player:set_clouds({
+	player:set_clouds({
 		height = 300
 	})
 
@@ -43,12 +34,17 @@ minetest.register_on_joinplayer(function(player)
 		}
 	})
 
-    md_astro.set_player_moon(player)
+	--player:override_day_night_ratio(minetest.get_timeofday())
+end)
 
-    player:set_sun({
-		texture = "sun_default.png",
-        scale = sun_moon_scale
-	})
+minetest.register_on_shutdown(function()
+    md_astro.save_state()
+end)
+
+local sun_moon_scale = 1
+
+minetest.register_on_joinplayer(function(player)
+
 end)
 
 minetest.register_globalstep(function(dtime)
