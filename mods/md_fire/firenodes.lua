@@ -39,5 +39,5 @@ md_fire.register_fire_node({
     damage = 1,
     tick_length = 5,
     --hotter_fire = "fire_3",
-    cooler_fire = "md_fire:fire_1"
+    cooler_fire = "md_fire:fire_1",
 })

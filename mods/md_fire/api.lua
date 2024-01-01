@@ -1,21 +1,27 @@
 
 md_fire.registered_fire_recipes = {}
 md_fire.registered_fire_nodes = {}
+md_fire.registered_flammables = {}
+md_fire.registered_flammables["moondark:charcoal"] = {after_burned = "md_fire:ember"}
 
 -- register fire recipe
-function md_fire.register_fire_recipe(item_name, output_name)
-    md_fire.registered_fire_recipes[item_name] = output_name
+function md_fire.register_fire_recipe(input_name, recipe_def)
+    md_fire.registered_fire_recipes[input_name] = recipe_def
 end
 
 -- add the flammable group to a node/item/tool
-function md_fire.register_flammable_item(item_name, level)
+function md_fire.register_flammable_item(item_name, combustion_data)
+    md_fire.registered_flammables[item_name] = combustion_data
+
+
     local new_groups = {}
     for k, v in pairs(minetest.registered_items[item_name].groups) do
         new_groups[k] = v
     end
-    new_groups.flammable = level
+    new_groups.flammable = combustion_data.flammable
+    new_groups.burn_chance = combustion_data.burn_chance
     minetest.override_item(item_name, {
-        groups = new_groups
+        groups = new_groups,
     })
     --minetest.log(dump(minetest.registered_items[item_name].groups))
 end
@@ -35,7 +41,7 @@ end
 
 -- get the output of a given item being cooked
 function md_fire.get_recipe_output(item_name)
-    return md_fire.registered_fire_recipes[item_name]
+    return md_fire.registered_fire_recipes[item_name].output
 end
 
 -- check if node has fuel nearby
@@ -99,46 +105,37 @@ function md_fire.register_fire_node(fire_node_def)
         minetest.get_node_timer(pos):start(fire_node_def.tick_length)
     end
     temp.on_timer = function(pos, elapsed)
-        local emb_pos = minetest.find_node_near(pos, 1, "group:flammable")
-        if emb_pos and math.random(1, 4) == 1 then
-            minetest.set_node(emb_pos, {name = "md_fire:ember"})
 
-        end
-        -- if no fuel around node
+        -- removing flame if no fuel present
         if not md_fire.node_near_fuel(pos) then
             minetest.remove_node(pos)-- remove node
             return false
         end
 
-        -- define a random air node to ignite
-        -- attempt to ignite it
-        local rand_node = md_fire.random_node_around_pos(pos)
-
-        if md_fire.attempt_ignite(rand_node) then
-            return false -- fire spread, no need to do anything else
-        end
-
-        -- if this node's flammable level is higher than
-        -- the flame level, upgrade the flame level
-        local fire_grp = minetest.get_node_group(minetest.get_node(pos).name, "fire")
-        local flammable_grp = minetest.get_node_group(minetest.get_node(rand_node).name, "flammable")
-
-        if flammable_grp ~= 0 then
-            minetest.log(minetest.get_node(rand_node).name .. " flammability: " .. flammable_grp .. " fire: " .. fire_grp)
-
+        -- If the node below can burn, attempt to burn it
+        local burning_pos = minetest.find_node_near(pos, 1, "group:flammable")
+        if burning_pos ~= nil then
+            local node_name = minetest.get_node(burning_pos).name
+            local flammable_grp = minetest.get_node_group(node_name, "flammable")
+            local brn_chc_grp = minetest.get_node_group(node_name, "burn_chance")
+            local fire_grp = minetest.get_node_group(minetest.get_node(pos).name, "fire")
             if flammable_grp > fire_grp then -- there is still latent energy potential
                 if fire_node_def.hotter_fire then
                     minetest.set_node(pos, {name = fire_node_def.hotter_fire})
                 end
-            else -- fire is at max heat
-                -- turn node to ember
-                minetest.set_node(rand_node, {name = "md_fire:ember"})
-                minetest.get_node_timer(rand_node):start(30)
+            elseif brn_chc_grp ~= 0 and math.random(1, brn_chc_grp) == 1 then
+                local comb_dat = md_fire.registered_flammables[node_name]
+                if comb_dat then
+                    --minetest.log("Somthing wrong.\n Dumping burning_pos: " .. dump(burning_pos) .. "\n Dumping comb_dat: " .. dump(comb_dat))
+                    minetest.set_node(burning_pos, {name = comb_dat.after_burned})
+                end
             end
         end
 
+        -- define a random air node and ignite it
+        local rand_node = md_fire.random_node_around_pos(pos)
+        md_fire.attempt_ignite(rand_node)
 
-        --minetest.log("Executing fire timer. Fuel detected, maintaining existence.")
         return true
     end
     local node_name = "md_fire:"..fire_node_def.name
@@ -164,37 +161,37 @@ md_fire.fire_node_template = {
         type = "fixed",
 		fixed = {-1/2, -1/2,-1/2, 1/2, -1/8, 1/2},
     },
-    on_timer = function(pos, elapsed)
+    -- on_timer = function(pos, elapsed)
 
-        -- if no fuel around node
-        if not md_fire.node_near_fuel(pos) then
-            minetest.remove_node(pos)-- remove node
-            return false
-        end
+    --     -- if no fuel around node
+    --     if not md_fire.node_near_fuel(pos) then
+    --         minetest.remove_node(pos)-- remove node
+    --         return false
+    --     end
 
-        -- define a random air node to ignite
-        -- attempt to ignite it
-        local rand_node = md_fire.random_node_around_pos(pos)
+    --     -- define a random air node to ignite
+    --     -- attempt to ignite it
+    --     local rand_node = md_fire.random_node_around_pos(pos)
 
-        if md_fire.attempt_ignite(rand_node) then
-            return false
-        end
+    --     if md_fire.attempt_ignite(rand_node) then
+    --         return false
+    --     end
 
-        -- if the rand node's flammable level is higher than
-        -- the flame level, upgrade the flame level
-        local fire_grp = minetest.get_node_group(minetest.get_node(pos), "fire")
-        local flammable_grp = minetest.get_node_group(minetest.get_node(rand_node), "flammable")
+    --     -- if the rand node's flammable level is higher than
+    --     -- the flame level, upgrade the flame level
+    --     local fire_grp = minetest.get_node_group(minetest.get_node(pos), "fire")
+    --     local flammable_grp = minetest.get_node_group(minetest.get_node(rand_node), "flammable")
 
 
-        if flammable_grp and flammable_grp >= fire_grp then -- there is still latent energy potential
-            minetest.set_node(pos, hotter_fire)
-        else -- fire is at max heat
-            -- turn node to ember
-            minetest.set_node(rand_node, {name = "md_fire:ember"})
-            minetest.get_node_timer(rand_node):start(30)
-        end
+    --     if flammable_grp and flammable_grp >= fire_grp then -- there is still latent energy potential
+    --         minetest.set_node(pos, hotter_fire)
+    --     else -- fire is at max heat
+    --         -- turn node to ember
+    --         minetest.set_node(rand_node, {name = "md_fire:ember"})
+    --         minetest.get_node_timer(rand_node):start(30)
+    --     end
 
-        --minetest.log("Executing fire timer. Fuel detected, maintaining existence.")
-        return true
-    end,
+    --     --minetest.log("Executing fire timer. Fuel detected, maintaining existence.")
+    --     return true
+    -- end,
 }

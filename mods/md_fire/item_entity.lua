@@ -16,9 +16,9 @@ local item = {
 		end
 	end,
 
-	heat = function(self, node)
-
-		local fire_level = minetest.get_node_group(node, "fire")
+	heat = function(self, node_name)
+		local p = self.object:get_pos()
+		local fire_level = minetest.get_node_group(node_name, "fire")
 		if fire_level >= self.flammable then
 			local output = md_fire.get_recipe_output(self.itemstack:get_name())
 			minetest.add_item(p, ItemStack(output))
@@ -50,7 +50,7 @@ local item = {
 				if node then
 					minetest.log("Current node is ".. node.name)
 					if minetest.get_node_group(node.name, "fire") ~= 0 then
-						self.heat(self, node)
+						self.heat(self, node.name)
 					end
 				end
 			end
