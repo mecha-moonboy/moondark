@@ -871,7 +871,7 @@ function mob:activate(staticdata, dtime)
 	if type(self.armor_groups) ~= "table" then
 		self.armor_groups = {}
 	end
-	self.armor_groups.immortal = 1
+	--self.armor_groups.immortal = 1
 	self.object:set_armor_groups(self.armor_groups)
 
 	if self.timer

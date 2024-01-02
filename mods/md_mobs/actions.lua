@@ -7,7 +7,7 @@ function md_mobs.action_pursue(self, target, timeout, method, speed_factor, anim
         local tgt_alv, los, tgt_pos = _self:get_target(target)
         if not tgt_alv then return true end
 
-        goal = goal or _self.dtime
+        goal = goal or tgt_pos
         timer = timer - _self.dtime
         self:animate(anim or "walk")
         local safe = true

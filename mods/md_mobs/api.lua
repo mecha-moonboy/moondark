@@ -26,6 +26,15 @@ function md_mobs.register_mob_seal(mobname)
     })
 end
 
+function md_mobs.punch(self, puncher, ...)
+    if self.hp <= 0 then return end
+    --creatura.basic_punch_punc
+end
+
+function md_mobs.init_api(self)
+
+end
+
 -- spawn a registered mob at a given location
 function md_mobs.spawn_mob(name, pos)
     -- Mix up scale?

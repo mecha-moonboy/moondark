@@ -85,7 +85,7 @@ minetest.register_abm({
     -- Chance of triggering `action` per-node per-interval is 1.0 / chance
 
     min_y = 0,
-    max_y = 500,
+    max_y = 200,
 
     catch_up = true, -- catch up after been absent from an area
 

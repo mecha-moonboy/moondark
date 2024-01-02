@@ -131,7 +131,7 @@ minetest.register_tool("moondark:digging_stick", {
 		groupcaps={
 			granular = {times={[1]=0.5, [2]=1.0, [3]=2.0, [4]=4.0 }, uses=15, maxlevel=1},
 		},
-		damage_groups = {fleshy=3},
+		damage_groups = {crunchy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
 	groups = {shovel = 1}
