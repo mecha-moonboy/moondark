@@ -15,7 +15,7 @@ md_fire.register_fire_node({
         }
     },
     damage = 1,
-    tick_length = 5,
+    tick_length = 4,
     tick_variance = 3,
     hotter_fire = "md_fire:fire_2",
     cooler_fire = "air"
@@ -27,7 +27,7 @@ md_fire.register_fire_node({
     --max_heat = 1,
 
     heat = 2,
-    light = 5,
+    light = 8,
     tiles = {
         name = "fire_2.png",
         animation = {

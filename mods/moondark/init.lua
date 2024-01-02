@@ -23,6 +23,10 @@ minetest.register_on_joinplayer(function(player)
 	-- end
 	-- player:set_formspec_prepend(formspec)
 
+	-- Hide sensitive debug info
+	player:hud_set_flags({basic_debug = false, minimap = false})
+
+
 	-- Set hotbar textures
 	player:hud_set_hotbar_image("hotbar_1.png^[multiply:#552205ff")
 	player:hud_set_hotbar_selected_image("planks.png^[multiply:#653215ff")
