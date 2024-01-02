@@ -1,6 +1,6 @@
 # Moondark
 ## Aiming to be the ultimate fantasy experience for Minetest
-The base game is beginning with a unique design philosophy unlike Minec**** or Minetest Game. A number of features herald a new brand of experience in voxel games:
+The base game is beginning with a unique design philosophy unlike Minec**** or Minetest Game. A number of features herald a new brand of experience in voxel games. Build more frameworks on top of what is there with little regard for the compared features of other games and complete focus on simplicity and ease-of-use and ease-of-play:
 
 APIs:
 - Herbs: register and generate herbs given particular conditions, for intelligent gameplay and rare ingredients.
