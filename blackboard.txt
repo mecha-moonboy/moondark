@@ -1,6 +1,5 @@
 In Progress:
     - everything
-    - fire -> charcoal
     - hand loom -> cloth -> curtain
     - apsen bark + cord + charcoal = notebook
     - farming [0/10] - theorize farming system
@@ -14,9 +13,10 @@ In Progress:
 Pending Completion:
 
 To Do:
-    - Critter net
+    - More chat commands, expose settings
+    - Clean up and documentation
+    - Actual creative mode
     - Automatic critter spawning
-    - Door
     Immediate:
         - ice
         - hand loom -> cloth -> basket
@@ -28,24 +28,31 @@ To Do:
     Bugfixes:
 
     Progression/Mechanics:
-        - Mob API
+        Tools and nodes:
+            - Door
+            - Spear and projectile
+            - Critter net
+            - Traps
+            - Fire
+            - Crucible
+            - Molds
+
+        Systems:
+            - Mob API
+            - Wanderers - NPCs, have a rapport system and can do menial tasks
+
+        Materials:
+            - Corpep
+            - Tim
+            - Onzber
+
         - Predators and prey
-        - Wanderers - NPCs, have a rapport system and can do menial tasks
-
         - Farm pests
-
         - Sanom - fish
 
-        - Traps
-
-        - Fire
-        - Crucible
-        - Molds
-        - Corpep
-        - Tim
-        - Onzber
-
     Cosmetic:
+        - Change font
+        - Style UI
         - Add status effect HUD markers
 
     Biomes:
@@ -91,8 +98,11 @@ Done:
     - Health and Breath Rework
     - Hotbar Retexture (not final)
     Mechanical/Features:
+    - Bigger terrain
+    - Charcoal stacks
     - Status Effects API
     - Herb API
+    - Moon and Sun phases, years
     - Nodes:
         - Stone
         - Water
@@ -107,7 +117,7 @@ Done:
         - Malpa Log, Leaves(advanced), Wood
         - Midlights
     - Misc:
-        - Leaves decay when broken - U
+        - Leaves decay when broken
     - Node Critters:
         - midlight - NA:000
     - Biomes:
@@ -116,12 +126,13 @@ Done:
         - Stone Slopes:
             - Rocks
         - Lowan Forest:
-            - Lowan Tree
-            - Arnoc, Sapling
+            - Brawsterries
+        - Sprute Forest
         - Beach:
             - Malpa
             - Noconuts
     - Tools:
+        - tinder
         - rake
         - stone axe, pickaxe, and machete
         - digging tool
@@ -181,5 +192,4 @@ VU      - Very Unstable
 NA:###  - Needs Adjusting: Issue ID:###
 
 Issues:
-    000 midlight_off and all "off" node critters have a collider
     001 moondark_core.pummel mechanic broken: wear indiscrimantory, interferes with chopping
