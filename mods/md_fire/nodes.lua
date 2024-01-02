@@ -8,15 +8,16 @@ minetest.register_node("md_fire:ember", {
     groups = {granular = 1, },
     drop = "md_fire:ash",
     on_construct = function(pos)
-        minetest.get_node_timer(pos):start(15)
+        minetest.get_node_timer(pos):start(math.random(15, 30))
     end,
     start_timer = function(pos)
-        minetest.get_node_timer(pos):start(15)
+        minetest.get_node_timer(pos):start(math.random(15, 30))
     end,
     on_timer = function(pos, elapsed)
         for i = 1, 2, 1 do
             -- choose a burnable block to turn into ember
             local burning_node = minetest.find_node_near(pos, 1, "group:flammable")
+
             -- there is a node to burn that is not charcoal
             -- replace it with it's after_burned node
             if burning_node ~= nil and
@@ -34,9 +35,6 @@ minetest.register_node("md_fire:ember", {
                         minetest.registered_nodes[after_burned].start_timer(burning_node)
                     end
                 end
-
-
-
                 --minetest.log("Burned node.")
             end
         end
@@ -52,10 +50,8 @@ minetest.register_node("md_fire:ember", {
                     minetest.swap_node(pos, {name = "md_fire:ash"})
                     minetest.check_for_falling(pos)
                     return false
-
-
                 end
-            elseif math.random(1, 6) < #flam_nodes then -- there was not enough air for ash
+            elseif math.random(1, 6) <= 1 then -- there was not enough air for ash
                 -- turn to charcoal
                 minetest.swap_node(pos, {name = "md_fire:charcoal"})
                 minetest.check_for_falling(pos)
