@@ -27,7 +27,7 @@ md_fire.register_fire_node({
     --max_heat = 1,
 
     heat = 2,
-    light = 5,
+    light = 8,
     tiles = {
         name = "fire_2.png",
         animation = {
