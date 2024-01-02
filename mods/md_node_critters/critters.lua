@@ -19,10 +19,14 @@ md_node_critters.register_critter({
     min_time = 15,
     max_time = 45,
     color = "#88ffccff",
-    light = 9,
+    light = 12,
     night_only = true,
     later_than = (1/24)*18.5,
     earlier_than = (1/24)*3,
     --max_light = 8,
     catch_chance = 4, -- 1 in 4 chance of catching bug when punched
 })
+
+if minetest.get_modpath("wielded_light") then
+    wielded_light.register_item_light("moondark:midlight", 14, "")
+end

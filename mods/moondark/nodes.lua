@@ -49,6 +49,18 @@ minetest.register_node("moondark:stone",{
     groups = {stone = 4},
 })
 
+minetest.register_node("moondark:ice",{
+    description = "ice",
+    drawtype = "glasslike",
+    tiles = {
+        "blank.png^[multiply:#9999ffff^[opacity:200^diagonal_stripes_broken.png^[opacity:200"
+    },
+    color = "#ddddffff",
+    use_texture_alpha = "blend",
+    sunlight_propagates = true,
+    paramtype = "light",
+    groups = {stone = 4},
+})
 -- Grainy
 
 minetest.register_node("moondark:turf",{
@@ -94,7 +106,7 @@ minetest.register_node("moondark:snow",{
         "blank.png^ground.png"
     },
     color = "#9999ddff",
-    groups = {hand = 2, granular = 2},
+    groups = {hand = 2, granular = 2, soil = 1},
 })
 
 minetest.register_node("moondark:clay",{
@@ -102,9 +114,21 @@ minetest.register_node("moondark:clay",{
     tiles = {
         "blank.png^ground.png"
     },
-    color = "#777777ff",
+    color = "#333333ff",
     groups = {hand = 2, granular = 2},
-    drops = {"moondark:clay_blob"},
+    drop = "moondark:clay_blob 3",
+})
+
+minetest.register_node("moondark:darksilt",{
+    description = "darksilt",
+    tiles = {
+        "blank.png^[multiply:#110022ff^spots_sparse.png^[multiply:#00aa55ff" --^spots.png^[colorize:#ffffffff
+    },
+    --color = "#330022ff",
+    light_source = 2,
+    paramtype = "light",
+    --use_texture_alpha = "clip",
+    groups = {granular = 2},
 })
 
 -- Water
@@ -113,12 +137,11 @@ minetest.register_node("moondark:water_source",{
 
     drawtype = "liquid",
     tiles = {
-        "transparent_ground.png"
+        "blank.png^[opacity:220"
     },
     use_texture_alpha = "blend",
-    color = "#00003355",
+    color = "#001009ff",
     paramtype = "light",
-
     walkable = false,
     pointable = false,
     diggable = false,
@@ -133,23 +156,23 @@ minetest.register_node("moondark:water_source",{
     liquid_viscosity = 1,
     liquid_renewable = false,
     liquid_range = 2,
-    post_effect_color = "#00003399",
+    post_effect_color = "#001009dd",
 })
 minetest.register_node("moondark:water_flowing",{
     drawtype = "flowingliquid",
-    tiles = {"transparent_ground.png"},
+    tiles = {"blank.png"},
     special_tiles = {
 		{
-			name = "transparent_ground.png",
-			backface_culling = false,
+			name = "blank.png^[opacity:220",
+			backface_culling = true,
 		},
 		{
-			name = "transparent_ground.png",
+			name = "blank.png^[opacity:220",
 			backface_culling = true,
 		},
 	},
     use_texture_alpha = "blend",
-    color = "#00003355",
+    color = "#001009ff",
     paramtype = "light",
 	paramtype2 = "flowingliquid",
 
@@ -168,7 +191,7 @@ minetest.register_node("moondark:water_flowing",{
     liquid_renewable = false,
     liquid_move_physics = 0,
     liquid_range = 2,
-    post_effect_color = "#00003399",
+    post_effect_color = "#001009dd",
 })
 
 -- Trees
@@ -236,7 +259,8 @@ minetest.register_node("moondark:lowan_leaves", {
         if not digger then
             return
         end
-        if minetest.get_item_group(digger:get_wielded_item(), "sword") then
+        --moondark_core.log("Digger was holding a: " .. dump(digger:get_wielded_item():get_name()))
+        if minetest.get_item_group(digger:get_wielded_item():get_name(), "sword") ~= 0 then
             for x = -2, 2, 1 do
                 for y = -2, 2, 1 do
                     for z = -2, 2, 1 do

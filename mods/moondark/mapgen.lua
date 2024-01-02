@@ -141,7 +141,7 @@ minetest.register_biome({ name = "beach",
     depth_riverbed = 1,
     vertical_blend = 6,
     y_max = 10,
-	--y_min = -100,
+    y_min = -128,
     heat_point = 50,
     humidity_point = 50
 })
@@ -151,8 +151,19 @@ minetest.register_biome({ name = "stone_beach",
     node_river_water = "mapgen_water_source",
     vertical_blend = 6,
     y_max = 10,
+    y_min = -128,
     heat_point = 21,
     humidity_point = 51
+})
+
+minetest.register_biome({ name = "abyssal_pit",
+    node_stone = "mapgen_stone",
+    node_top = "moondark:darksilt",
+    depth_top = 2,
+    y_max = -180,
+    y_min = -300,
+    heat_point = 50,
+    humidity_point = 50
 })
 
 -- Trees
@@ -268,8 +279,6 @@ minetest.register_decoration({ name = "moondark:rock",
     y_max = 300,
     y_min = -3000,
     decoration = "moondark:rock",
-
-
 })
 
 minetest.register_decoration({ name = "moondark:driftwood",
@@ -356,7 +365,7 @@ minetest.register_decoration({ name = "moondark:lowan_tree_fallen",
         spread = {x = 100, y = 100, z = 100},
         seed = 329,
         octaves = 1,
-        persist = 0.2
+        persist = 0.1
     },
     schematic = minetest.get_modpath("moondark").."/schematics/lowan_tree_fallen.mts",
     place_offset_y = -1,
@@ -394,10 +403,29 @@ minetest.register_decoration({ name = "moondark:sprute_tree_fallen",
         spread = {x = 100, y = 100, z = 100},
         seed = 276,
         octaves = 1,
-        persist = 0.1
+        persist = 0.05
     },
     schematic = minetest.get_modpath("moondark").."/schematics/sprute_tree_fallen.mts",
     place_offset_y = 0,
     flags = "place_center_x, place_center_z",
     rotation = "random"
+})
+
+minetest.register_decoration({ name = "moondark:darksilt_pillar",
+    deco_type = "simple",
+    place_on = {"moondark:darksilt"},
+    sidelen = 16,
+    noise_params = {
+        offset = 0.05,
+        scale = 0.01,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 329,
+        octaves = 1,
+        persist = 0.6
+    },
+    --y_max = 300,
+    --y_min = -3000,
+    height = 8,
+    height_max = 16,
+    decoration = "moondark:darksilt",
 })

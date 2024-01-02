@@ -129,7 +129,7 @@ minetest.register_tool("moondark:digging_stick", {
 		full_punch_interval = 1.3,
 		max_drop_level=0,
 		groupcaps={
-			granular = {times={[1]=0.5, [2]=1.0, [3]=2.0, [4]=4.0 }, uses=5, maxlevel=1},
+			granular = {times={[1]=0.5, [2]=1.0, [3]=2.0, [4]=4.0 }, uses=15, maxlevel=1},
 		},
 		damage_groups = {fleshy=3},
 	},

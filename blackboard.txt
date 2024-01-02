@@ -1,6 +1,5 @@
 In Progress:
     - everything
-    - fire -> charcoal
     - hand loom -> cloth -> curtain
     - apsen bark + cord + charcoal = notebook
     - farming [0/10] - theorize farming system
@@ -14,6 +13,10 @@ In Progress:
 Pending Completion:
 
 To Do:
+    - More chat commands, expose settings
+    - Clean up and documentation
+    - Actual creative mode
+    - Automatic critter spawning
     Immediate:
         - ice
         - hand loom -> cloth -> basket
@@ -25,24 +28,31 @@ To Do:
     Bugfixes:
 
     Progression/Mechanics:
-        - Mob API
+        Tools and nodes:
+            - Door
+            - Spear and projectile
+            - Critter net
+            - Traps
+            - Fire
+            - Crucible
+            - Molds
+
+        Systems:
+            - Mob API
+            - Wanderers - NPCs, have a rapport system and can do menial tasks
+
+        Materials:
+            - Corpep
+            - Tim
+            - Onzber
+
         - Predators and prey
-        - Wanderers - NPCs, have a rapport system and can do menial tasks
-
         - Farm pests
-
         - Sanom - fish
 
-        - Traps
-
-        - Fire
-        - Crucible
-        - Molds
-        - Corpep
-        - Tim
-        - Onzber
-
     Cosmetic:
+        - Change font
+        - Style UI
         - Add status effect HUD markers
 
     Biomes:
@@ -77,9 +87,10 @@ To Do:
         - creepers - vine
 
     Node Critters:
-        - snairls
-        - ribbid
-        - serpin
+        - snairls - snail
+        - ribbid - frog
+        - serpin - snek
+        - malc - clam
 
 
 Done:
@@ -87,6 +98,11 @@ Done:
     - Health and Breath Rework
     - Hotbar Retexture (not final)
     Mechanical/Features:
+    - Bigger terrain
+    - Charcoal stacks
+    - Status Effects API
+    - Herb API
+    - Moon and Sun phases, years
     - Nodes:
         - Stone
         - Water
@@ -100,12 +116,8 @@ Done:
         - Lowan Log, Leaves, Wood
         - Malpa Log, Leaves(advanced), Wood
         - Midlights
-    - Status Effects: [textures, HUD]
-        - Quick
-        - Weightless
-        - Restoration
     - Misc:
-        - Leaves decay when broken - U
+        - Leaves decay when broken
     - Node Critters:
         - midlight - NA:000
     - Biomes:
@@ -114,30 +126,70 @@ Done:
         - Stone Slopes:
             - Rocks
         - Lowan Forest:
-            - Lowan Tree
-            - Arnoc, Sapling
+            - Brawsterries
+        - Sprute Forest
         - Beach:
             - Malpa
             - Noconuts
     - Tools:
+        - tinder
         - rake
         - stone axe, pickaxe, and machete
         - digging tool
 
-Theory:
+# Brainstorming #
+
+Feature wall:
     Farming:
         - crop growth timer and parameters
-        - harvesting, stages, and drops
+        - seasons
+        - stages
+        - harvesting
+    Magic:
+        - action magic (attraction, repulsion)
+        - vibration magic (frequency, vibration)
+
+        - potion brewing
+        - herb gathering
+        - druidry
+        - ritual casting
+
+        - instruments
+        - astrology
+        - disaster cycle
+        - prevent disaster
+
+        - wizardry
+        - artifice
+
+        - sorcery
+        - enchantment
+
+        - geomancy
+
+        - golemancy
+
+    Smithing:
+        - smelting
+        - casting
+        - forging
+        - quenching
+        - finishing
+
+Theory:
+    - Using ABMs for resonance and vibration
+    - Node golems that move using node timers
+    - Geocentric astrology along outside of walls
+
 
 
 LEGEND:
-PU - Potentially Unstable
-VU - Very Unstable
-U - Unstable
-  - Stable (hopefully)
-E - Experimental
-NA:### - Needs Adjusting: Issue ID:###
+        - Stable (hopefully)
+E       - Experimental
+PU      - Potentially Unstable
+U       - Unstable
+VU      - Very Unstable
+NA:###  - Needs Adjusting: Issue ID:###
 
 Issues:
-    000 midlight_off and all "off" node critters have a collider
     001 moondark_core.pummel mechanic broken: wear indiscrimantory, interferes with chopping

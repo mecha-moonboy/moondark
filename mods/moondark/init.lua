@@ -5,6 +5,7 @@ local S = minetest.get_translator("moondark")
 
 moondark_core = {}
 
+moondark_core.DEBUG = true
 moondark_core.LIGHT_MAX = 14
 moondark_core.get_translator = S
 
@@ -22,6 +23,10 @@ minetest.register_on_joinplayer(function(player)
 	-- end
 	-- player:set_formspec_prepend(formspec)
 
+	-- Hide sensitive debug info
+	player:hud_set_flags({basic_debug = false, minimap = false})
+
+
 	-- Set hotbar textures
 	player:hud_set_hotbar_image("hotbar_1.png^[multiply:#552205ff")
 	player:hud_set_hotbar_selected_image("planks.png^[multiply:#653215ff")
@@ -33,18 +38,11 @@ minetest.register_on_joinplayer(function(player)
 		name = "health",
 		scale = {x = 1, y = 1},
 		text = "heart.png",
-		--text2 = "heart.png",
 		number = 10,
 		item = 20,
 		direction = 3,
-		-- Direction: 0: left-right, 1: right-left, 2: top-bottom, 3: bottom-top
-
 		alignment = {x=0, y=0},
-		--offset = {x=-20*2.5,y=200},
-		--world_pos = {x=0, y=0, z=0},
 		size = {x=32, y=32},
-		--z_index = 0,
-		--style = 0,
 	})
 	minetest.hud_replace_builtin("breath", {
 		hud_elem_type = "statbar",
@@ -55,18 +53,9 @@ minetest.register_on_joinplayer(function(player)
 		number = 10,
 		item = 20,
 		direction = 3,
-		-- Direction: 0: left-right, 1: right-left, 2: top-bottom, 3: bottom-top
-
 		alignment = {x=0, y=0},
 		offset = {x=-24,y=0},
-		--world_pos = {x=0, y=0, z=0},
 		size = {x=32, y=32},
-		--z_index = 0,
-		--style = 0,
-	})
-
-	player:set_clouds({
-		height = 300
 	})
 end)
 
