@@ -1,5 +1,5 @@
 creatura.register_mob("md_mobs:weaver", {
-    visual_size = {x = 20, y = 20},
+    visual_size = {x = 16, y = 16},
     mesh = "weaver.b3d",
     textures = {
 		"weaver.png",
