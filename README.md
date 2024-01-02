@@ -1,6 +1,6 @@
 # Moondark
-## Aiming to be the ultimate fantasy experience for Minetest
-The base game is beginning with a unique design philosophy unlike Minec**** or Minetest Game. A number of features herald a new brand of experience in voxel games. The idea is to build more frameworks on top of what is there already with little regard for the compared features of other games and complete focus on simplicity and ease-of-use and ease-of-play.
+## Aiming to be an ultimate fantasy experience for Minetest
+A personal project for my own satisfaction. Textures and color palette are a work in progress. The theme may get more grim down the line. The aim of this project is to recapture some of the nostalgia of learning Minec*** for the first time, as well as the epic adventure and progression of terraria. I am dividing the game into distinct progression phases, each with their own set of struggles and challenges
 
 APIs:
 - Herbs: register and generate herbs given particular conditions, for intelligent gameplay and rare ingredients.
