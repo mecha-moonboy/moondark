@@ -13,7 +13,6 @@ end
 function md_fire.register_flammable_item(item_name, combustion_data)
     md_fire.registered_flammables[item_name] = combustion_data
 
-
     local new_groups = {}
     for k, v in pairs(minetest.registered_items[item_name].groups) do
         new_groups[k] = v
@@ -68,7 +67,7 @@ function md_fire.check_can_ignite(pos)
         return false
     end
     -- there isn't a fuel block nearby
-    if not md_fire.node_near_fuel(pos) then return false end
+    if not md_fire.node_near_fuel(air_near) then return false end
 
     return true
 end
