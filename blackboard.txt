@@ -13,6 +13,7 @@ In Progress:
 Pending Completion:
 
 To Do:
+    - Divination and dowsing for ores and other resources
     - More chat commands, expose settings
     - Clean up and documentation
     - Actual creative mode
