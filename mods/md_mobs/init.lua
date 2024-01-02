@@ -13,4 +13,6 @@ end)
 -- end)
 
 dofile(modname .. "/api.lua")
-dofile(modname .. "/mobs.lua")
+dofile(modname .. "/actions.lua")
+dofile(modname .. "/behaviors.lua")
+dofile(modname .. "/mobs/weaver.lua")
