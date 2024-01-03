@@ -26,7 +26,7 @@ minetest.handle_node_drops = function(pos, drops, digger)
 end
 
 
--- DEBUG
+-- DEBUG --
 function moondark_core.log(message, channel)
 	if not moondark_core.DEBUG then
 		return
@@ -39,7 +39,7 @@ function moondark_core.log(message, channel)
 	end
 end
 
--- Node Operations
+-- NODE OPERATIONS --
 
 -- check if any of the 6 adjacent nodes are of a group and return a list
 function moondark_core.get_surrounding_nodes_of_group(pos, group)
@@ -51,19 +51,6 @@ function moondark_core.get_surrounding_nodes_of_group(pos, group)
 		pos:offset( 1, 0, 0), -- east
 		pos:offset(-1, 0, 0), -- west
 	}
-	local ret_list = {}
-	for _, pos in ipairs(pos_list) do
-		if minetest.get_node_group(minetest.get_node(pos).name, group) ~= 0 then
-			table.insert(ret_list, pos)
-		end
-	end
-
-	return ret_list
-end
-
--- check if any of the 6 adjacent nodes are of a group and return a list
-function moondark_core.get_nodes_of_group_from_26(pos, group)
-	local pos_list = moondark_core.get_26_around(pos)
 	local ret_list = {}
 	for _, pos in ipairs(pos_list) do
 		if minetest.get_node_group(minetest.get_node(pos).name, group) ~= 0 then
@@ -88,13 +75,27 @@ function moondark_core.random_pos_around_pos(pos)
 	return pos_list[math.random(1, #pos_list)]
 end
 
+-- check if any of the 6 adjacent nodes are of a group and return a list
+function moondark_core.get_nodes_of_group_from_26(pos, group)
+	local pos_list = moondark_core.get_26_around(pos)
+	local ret_list = {}
+	for _, pos in ipairs(pos_list) do
+		if minetest.get_node_group(minetest.get_node(pos).name, group) ~= 0 then
+			table.insert(ret_list, pos)
+		end
+	end
+
+	return ret_list
+end
+
+-- return a list of the 26 positions around pos
 function moondark_core.get_26_around(pos)
 	local pos_list = {}
 
 	for xp = 1, 3, 1 do
 		for yp = 1, 3, 1 do
 			for zp = 1, 3, 1 do
-				if xp == 0 and yp == 0 and zp == 0 then
+				if xp == 2 and yp == 2 and zp == 2 then
 					break
 				end
 				table.insert(pos_list, #pos_list, pos:offset(xp - 2, yp - 2, zp - 2))
@@ -105,24 +106,13 @@ function moondark_core.get_26_around(pos)
 	return pos_list
 end
 
+-- return a random node from the 26 around pos
 function moondark_core.random_from_26(pos)
-	local pos_list = {}
-
-	for xp = 1, 3, 1 do
-		for yp = 1, 3, 1 do
-			for zp = 1, 3, 1 do
-				if xp == 0 and yp == 0 and zp == 0 then
-					break
-				end
-
-				table.insert(pos_list, #pos_list, vector.new(xp, yp, zp))
-			end
-		end
-	end
-
+	local pos_list = moondark_core.get_26_around(pos)
 	return pos_list[math.random(1, #pos_list)]
 end
 
+-- because for some reason this doesn't already exist
 function moondark_core.simple_destroy_node(pos, toolname)
 	local node = minetest.get_node(pos)
 	local drops = minetest.get_node_drops(node, toolname)
@@ -130,24 +120,34 @@ function moondark_core.simple_destroy_node(pos, toolname)
 	minetest.remove_node(pos)
 end
 
--- Tree Functions
+-- TREE FUNCTIONS --
+
+-- returns bool
 function moondark_core.is_leaves(pos)
     return (minetest.get_item_group(minetest.get_node(pos).name, "leaves") > 0)
 end
 
 function moondark_core.start_decay(pos)
+	-- cancel if a log is nearby
     if minetest.find_node_near(pos, 3, "group:log") then
         return
     end
 
-	moondark_core.simple_destroy_node(pos, "sword")
+
+	--moondark_core.simple_destroy_node(pos, "sword")
 
 	local new_pos = minetest.find_node_near(pos, 2, "group:leaves", false)
 	while new_pos do
-		--minetest.get_node_timer(new_pos):start(math.random(30, 90))
 		moondark_core.start_decay(new_pos)
 		moondark_core.simple_destroy_node(new_pos, "sword")
 		new_pos = minetest.find_node_near(pos, 2, "group:leaves", false)
+
+
+		local extra_node = minetest.find_node_near(pos, 2, "group:leaves", false)
+		if extra_node then
+			moondark_core.start_decay(extra_node)
+		moondark_core.simple_destroy_node(extra_node, "sword")
+		end
 	end
 
 end

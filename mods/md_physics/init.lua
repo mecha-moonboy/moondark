@@ -1,17 +1,18 @@
 md_physics = {}
 
+-- returns float
 local function calculate_attribute_product(player, attribute)
     -- turn meta into a table
-	local a = minetest.deserialize(player:get_meta():get_string("md_physics:physics"))
+	local attributes = minetest.deserialize(player:get_meta():get_string("md_physics:physics"))
 	local product = 1
     -- if the attribute table is nil, return 1
-	if a == nil or a[attribute] == nil then
+	if attributes == nil or attributes[attribute] == nil then
 		return product
 	end
 
     -- otherwise, the factors table is set
     -- according to it's attribute key
-	local factors = a[attribute]
+	local factors = attributes[attribute]
 	if type(factors) == "table" then
 		for _, factor in pairs(factors) do -- for each factor
 			product = product * factor -- multiply the product by it

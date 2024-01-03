@@ -1,9 +1,7 @@
 md_astro = {}
 local modname = minetest.get_modpath("md_astro")
 
--- minetest.register_on_generated(function(minp, maxp, blockseed)
---     -- do things when a map chunk is generated
--- end)
+local sun_moon_scale = 1
 
 minetest.register_on_joinplayer(function(player)
     md_astro.set_player_moon(player)
@@ -41,15 +39,10 @@ minetest.register_on_shutdown(function()
     md_astro.save_state()
 end)
 
-local sun_moon_scale = 1
-
-minetest.register_on_joinplayer(function(player)
-
-end)
 
 minetest.register_globalstep(function(dtime)
      -- do astro step
-    md_astro.do_step(dtime)
+    md_astro.do_step()
 end)
 
 dofile(modname .. "/api.lua")

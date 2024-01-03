@@ -16,26 +16,27 @@ minetest.register_node("md_fire:ember", {
     on_timer = function(pos, elapsed)
         for i = 1, 2, 1 do
             -- choose a burnable block to turn into ember
-            local burning_node = minetest.find_node_near(pos, 1, "group:flammable")
+            local targ_pos = minetest.find_node_near(pos, 1, "group:flammable")
 
             -- there is a node to burn that is not charcoal
             -- replace it with it's after_burned node
-            if burning_node ~= nil and
-            minetest.get_node(burning_node).name ~= "md_fire:charcoal" and
-            minetest.get_node_group(minetest.get_node(burning_node).name, "flammable") > 1 then
-                local node_name = minetest.get_node(burning_node).name
+            if targ_pos == nil then break end
 
-                if not md_fire.attempt_ignite(burning_node) then
-                    -- if block couldn't be ignited, turn it into it's burnt block instead
-                    local after_burned = md_fire.registered_flammables[node_name].after_burned
-                    minetest.swap_node(burning_node, {name = after_burned})
-                    minetest.check_for_falling(pos)
+            if minetest.get_node(targ_pos).name ~= "md_fire:charcoal" and
+            minetest.get_node_group(minetest.get_node(targ_pos).name, "flammable") > 1 then
+                local node_name = minetest.get_node(targ_pos).name
+                if md_fire.attempt_ignite(targ_pos) then break end
 
-                    if minetest.registered_nodes[after_burned].start_timer then
-                        minetest.registered_nodes[after_burned].start_timer(burning_node)
-                    end
+                -- if block couldn't be ignited,
+                -- random chance to turn it into
+                -- it's burnt block instead
+                if math.random(1, 3) ~= 1 then break end
+                local after_burned = md_fire.registered_flammables[node_name].after_burned
+                minetest.swap_node(targ_pos, {name = after_burned})
+                minetest.check_for_falling(pos)
+                if minetest.registered_nodes[after_burned].start_timer then
+                    minetest.registered_nodes[after_burned].start_timer(targ_pos)
                 end
-                --minetest.log("Burned node.")
             end
         end
 
@@ -45,12 +46,11 @@ minetest.register_node("md_fire:ember", {
             local oxy_nodes = moondark_core.get_surrounding_nodes_of_group(pos, "breathable")
             local flam_nodes = moondark_core.get_surrounding_nodes_of_group(pos, "flammable")
             -- if it is, turn this node to ash
-            if #oxy_nodes ~= 0 then -- there was enough air for ash
-                if math.random(1, 6) < #oxy_nodes + #flam_nodes then
-                    minetest.swap_node(pos, {name = "md_fire:ash"})
-                    minetest.check_for_falling(pos)
-                    return false
-                end
+            if #oxy_nodes ~= 0
+            and math.random(1, 6) < #oxy_nodes + #flam_nodes then -- there was enough air for ash
+                minetest.swap_node(pos, {name = "md_fire:ash"})
+                minetest.check_for_falling(pos)
+                return false
             elseif math.random(1, 6) <= 1 then -- there was not enough air for ash
                 -- turn to charcoal
                 minetest.swap_node(pos, {name = "md_fire:charcoal"})

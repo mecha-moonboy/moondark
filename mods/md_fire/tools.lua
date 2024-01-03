@@ -20,7 +20,7 @@ minetest.register_tool("md_fire:tinder", {
 				minetest.chat_send_player(player_name, "This area is protected")
 				return
 			end
-			if math.random(1, 1) == 1 then
+			if math.random(1, 1) == 1 then -- adjust this later
 				if nodedef.on_ignite then
 					nodedef.on_ignite(pointed_thing.under, user)
 				elseif minetest.get_item_group(node_under, "flammable") >= 1

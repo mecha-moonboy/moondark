@@ -5,8 +5,6 @@ local builtin_item = minetest.registered_entities["__builtin:item"]
 local item = {
 	set_item = function(self, itemstring)
 		builtin_item.set_item(self, itemstring)
-
-
 		local stack = ItemStack(itemstring)
 		local itemdef = minetest.registered_items[stack:get_name()]
 		self.itemstack = stack
@@ -24,14 +22,11 @@ local item = {
 			minetest.add_item(p, ItemStack(output))
 			self.object:remove() -- edit to cook item instead of removing it
 		else
-
 		end
-
 	end,
 
 	on_step = function(self, dtime, ...)
 		builtin_item.on_step(self, dtime, ...)
-		--minetest.log("Calling on_step for an item")
 		-- has the flammable property
 		if self.flammable then
 			-- flammable, check for igniters every 10 s

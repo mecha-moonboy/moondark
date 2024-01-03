@@ -1,8 +1,17 @@
-md_fire.register_fire_node({
-    name = "fire_1",
+--[[
+Template fire node:
+    name
+    heat
+    light
+    tiles
+    damage
+    tick_length
+    tick_variance
+    cooler_fire
+    hotter_fire
+]]
 
-    --max_heat = 1,
-
+md_fire.register_fire_node({ name = "fire_1",
     heat = 1,
     light = 5,
     tiles = {
@@ -21,11 +30,7 @@ md_fire.register_fire_node({
     cooler_fire = "air"
 })
 
-md_fire.register_fire_node({
-    name = "fire_2",
-
-    --max_heat = 1,
-
+md_fire.register_fire_node({ name = "fire_2",
     heat = 2,
     light = 8,
     tiles = {
@@ -40,6 +45,5 @@ md_fire.register_fire_node({
     damage = 1,
     tick_length = 8,
     tick_variance = 4,
-    --hotter_fire = "fire_3",
     cooler_fire = "md_fire:fire_1",
 })

@@ -24,47 +24,46 @@ How I want to control it:
     - acid
 
 ]]
+local month_length = 8
+local year_length = 8
 
 local meta = minetest.get_mod_storage()
 
+-- Loading time data from meta.
 local curr_day = meta:get_int("curr_day") or 0
-
 local moon_phase = meta:get_int("moon_phase") or 1 -- Day (20 min)
 local moon_cycle = meta:get_int("moon_cycle") or 1 -- Month (160 minutes)(8 days)
 local year = meta:get_int("year") or 1       -- Year (16hrs)(8 months, 64 days)
---local first_planet_orbit = 1 -- three times a year (2 moon cycles)
 
-minetest.log("Continuing day " .. moon_phase .. " of month " .. moon_cycle .. " of year " .. year .. ", total days incarnated: " .. curr_day)
-
-function md_astro.do_step(dtime)
-    --moondark_core.log("Day: " .. curr_day)
-    --timer = timer + dtime
+-- Execute this on globalstep.
+function md_astro.do_step()
+    -- iterate the day and moon phase
     if curr_day == minetest.get_day_count() then
         return
     end
     curr_day = minetest.get_day_count()
-
     md_astro.increment_moon_phase()
 end
 
--- increment the moon and do any phase start behaviour and messages
+-- Increment the moon and
+-- do any phase start behaviour.
 function md_astro.increment_moon_phase()
     moon_phase = moon_phase + 1
-    if moon_phase > 8 then
+    if moon_phase > month_length then
         moon_phase = 1
         md_astro.increment_moon_cycle()
-        --moondark_core.log("Moon cycle: " .. moon_cycle)
     end
 
     -- set moon texture for players
     md_astro.set_player_moons_all(moon_phase)
 end
 
+-- Increment the month(moon cycle) and
+-- do any month start behaviour.
 function md_astro.increment_moon_cycle()
 
     moon_cycle = moon_cycle + 1
-    if moon_cycle > 8 then
-        -- increment year
+    if moon_cycle > year_length then
         moon_cycle = 1
     end
 
@@ -79,14 +78,14 @@ function md_astro.increment_moon_cycle()
     end
 end
 
--- set a specific player's moon
+-- Set a specific player's moon.
 function md_astro.set_player_moon(player)
     player:set_moon({
         texture = "moon_" .. moon_phase .. ".png"
     })
 end
 
--- set a specific player's sun
+-- Set a specific player's sun.
 function md_astro.set_player_sun(player)
     local phase
     if moon_cycle == 1 or moon_cycle == 2 then
@@ -105,7 +104,7 @@ function md_astro.set_player_sun(player)
     })
 end
 
--- refresh all player's moon visuals
+-- Refresh all player's moon visuals.
 function md_astro.set_player_moons_all(phase)
     local players = minetest.get_connected_players()
     for _, player in ipairs(players) do
@@ -115,7 +114,7 @@ function md_astro.set_player_moons_all(phase)
     end
 end
 
--- refresh all player's sun visuals
+-- Refresh all player's sun visuals.
 function md_astro.set_player_suns_all(state)
     local players = minetest.get_connected_players()
     for _, player in ipairs(players) do
@@ -125,6 +124,7 @@ function md_astro.set_player_suns_all(state)
     end
 end
 
+-- Duh.
 function md_astro.save_state()
     meta:set_int("curr_day", curr_day)
     meta:set_int("moon_phase", moon_phase)

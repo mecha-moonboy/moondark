@@ -1,12 +1,17 @@
 md_herbs = {}
 md_herbs.registered_herbs = {}
 
+-- REGISTER --
+
 function md_herbs.register_herb(herb_definition)
     local ind = #md_herbs.registered_herbs + 1
     -- add herb definition to list
     md_herbs.registered_herbs[ind] = herb_definition
 end
 
+-- NODE OPERATIONS --
+
+-- run through a list of boolean checks
 function md_herbs.check_conditions(pos, herb)
 
     if herb.node_under and minetest.get_node(pos:offset(0, -1, 0)).name ~= herb.node_under then
@@ -48,8 +53,9 @@ function md_herbs.check_conditions(pos, herb)
     return true
 end
 
--- called once on the herb placement ABM
+-- called once on the herb placement ABM, checks and places herb
 function md_herbs.attempt_place_herb(pos)
+    -- no air, cancel
     if minetest.get_node(pos).name ~= "air" then
         return
     end
@@ -85,7 +91,7 @@ minetest.register_abm({
     -- Chance of triggering `action` per-node per-interval is 1.0 / chance
 
     min_y = 0,
-    max_y = 500,
+    max_y = 200,
 
     catch_up = true, -- catch up after been absent from an area
 

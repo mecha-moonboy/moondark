@@ -4,11 +4,6 @@
 	- add consumable or item with effect
 	- global step
 	- effect function
-
-	- clear cache
-	- reset effects
-	- save effects
-	- load effects
 ]]
 
 
@@ -43,6 +38,7 @@ local icon_ids = {}
 -- 	end
 
 -- end
+
 
 function md_effects.register_effect(name, effect_definition)
 	md_effects.registered_effects[name] = effect_definition
@@ -113,24 +109,18 @@ end
 
 local is_player, entity, meta
 
--- put ongoing status effect code in here
+
 minetest.register_globalstep(function(dtime)
 	for effect_name, player_list  in pairs(md_effects.active_effects) do
-		--minetest.log(effect_name)
 		local effect = md_effects.registered_effects[effect_name]
-
 		for player_name, eff_inst in pairs(player_list) do
-			--moondark_core.log("Effect: " .. effect_name)
-			--moondark_core.log("Player: " .. player_name)
-			--minetest.log("Effect instance: " .. minetest.serialize(eff_inst))
+			-- Cancel if there is no effect instance
 			if not md_effects.active_effects[effect_name][player_name] then return end
-
 			local player = minetest.get_player_by_name(player_name)
 
 			-- timer for effect duration
-			if not md_effects.active_effects[effect_name][player_name].timer then md_effects.active_effects[effect_name][player_name].timer = 0 end
-
-			md_effects.active_effects[effect_name][player_name].timer = md_effects.active_effects[effect_name][player_name].timer + dtime
+			--if not md_effects.active_effects[effect_name][player_name].timer then md_effects.active_effects[effect_name][player_name].timer = 0 end
+			md_effects.active_effects[effect_name][player_name].timer = (md_effects.active_effects[effect_name][player_name].timer or 0) + dtime
 
 			-- particle spawner
 			if effect.particle_color then
@@ -139,16 +129,20 @@ minetest.register_globalstep(function(dtime)
 
 			-- whether the effect should end
 			if md_effects.active_effects[effect_name][player_name].timer >= md_effects.active_effects[effect_name][player_name].duration then
+				-- remove the physics override on the effect
 				if effect.physics_override then
 					md_physics.remove_physics_factor(player, effect.physics_override.attribute, effect.physics_override.id)
 				end
+
+				-- remove all associated data
 				md_effects.active_effects[effect_name][player_name] = nil
 				meta = player:get_meta()
 				meta:set_string(effect.meta_tag, minetest.serialize(md_effects.active_effects[effect_name][player_name]))
 				return
 			end
 
-
+			-- if there is a step property on the
+			-- effect this executes every [step] seconds
 			local step = md_effects.registered_effects[effect_name].step
 			-- effect timer
 			if step then
@@ -157,8 +151,8 @@ minetest.register_globalstep(function(dtime)
 				end
 				-- timer for effect step
 				md_effects.active_effects[effect_name][player_name].timer2 = (md_effects.active_effects[effect_name][player_name].timer2 or 0) + dtime
+
 				if md_effects.active_effects[effect_name][player_name].timer2 >= step then
-					--moondark_core.log("Executing on_step for " .. effect_name)
 					effect.on_step(player)
 					md_effects.active_effects[effect_name][player_name].timer2 = 0
 				end
@@ -193,6 +187,7 @@ function md_effects._reset_player_effects(player, set_hud)
 	end
 
 	-- fix this here
+
 end
 
 function md_effects._save_player_effects(player)
@@ -226,7 +221,7 @@ function md_effects._load_player_effects(player)
 	end
 end
 
--- Returns true if player has given effect
+-- Boolean
 function md_effects.player_has_effect(player, effect_name)
 	if not md_effects.active_effects[effect_name] then
 		return false
@@ -234,6 +229,7 @@ function md_effects.player_has_effect(player, effect_name)
 	return md_effects.active_effects[effect_name][player:get_player_name()] ~= nil
 end
 
+-- Effect instance
 function md_effects.player_get_effect(player, effect_name)
 	if not md_effects.active_effects[effect_name] or not md_effects.active_effects[effect_name][player:get_player_name()] then
 		return false
@@ -259,7 +255,7 @@ end)
 
 minetest.register_on_joinplayer( function(player)
 	md_effects._reset_player_effects(player, false) -- make sure there are no wierd holdover effects
-	--md_effects._load_player_effects(player)
+	md_effects._load_player_effects(player)
 	potions_init_icons(player)
 	-- .after required because player:hud_change doesn't work when called
 	-- in same tick as player:hud_add
@@ -287,7 +283,7 @@ end)
 -- |____/ \__,_| .__/| .__/ \___/|_|   \__|
 --             |_|   |_|
 
-function md_effects._use_potion(item, obj, color)
+function md_effects._activate_effect(item, obj, color)
 	local d = 0.1
 	local pos = obj:get_pos()
 	minetest.add_particlespawner({
@@ -305,7 +301,7 @@ function md_effects._use_potion(item, obj, color)
 		maxsize = 1,
 		collisiondetection = true,
 		vertical = false,
-		texture = "mcl_particles_effect.png^[colorize:"..color..":127",
+		texture = "md_effect_particle.png^[colorize:"..color..":127",
 	})
 end
 
@@ -327,7 +323,7 @@ function md_effects._add_spawner(obj, color)
 		maxsize = 1,
 		collisiondetection = false,
 		vertical = false,
-		texture = "mcl_particles_effect.png^[colorize:"..color..":127",
+		texture = "md_effect_particle.png^[colorize:"..color..":127",
 	})
 end
 
@@ -345,9 +341,6 @@ end
 
 -- called to add effects
 function md_effects.give_effect(player, effect_name, duration)
-	--if not effect then return end
-	--moondark_core.log("Giving effect to player...")
-
 	-- if there's no meta data on the player, exit...
     if not player:get_meta() then
 		return false
@@ -358,6 +351,7 @@ function md_effects.give_effect(player, effect_name, duration)
 	-- get the effect from registry
 	local effect = md_effects.registered_effects[effect_name]
 
+	-- apply physics override if present
 	if effect.physics_override then
 		md_physics.add_physics_factor(player,
 		effect.physics_override.attribute,
@@ -367,21 +361,15 @@ function md_effects.give_effect(player, effect_name, duration)
 	end
 
     if not md_effects.active_effects[effect_name][player_name] then
-		--moondark_core.log("Player did not have the effect before, now they do...")
 
         -- add the player as key and a table as value
 		md_effects.active_effects[effect_name][player_name] = {duration = duration, timer = 0, timer2 = 0}
 		if effect.start_func then
-			--moondark_core.log("Calling the start function of the effect...")
 			effect.start_func(minetest.get_player_by_name(player_name))
 		end
 	else -- player was on the list, so instead
-		--moondark_core.log("Player did have the effect before...")
-
 		local victim = md_effects.active_effects[effect_name][player_name]
-
 		if effect.start_func then
-			--moondark_core.log("Calling the start function of the effect...")
 				effect.start_func(minetest.get_player_by_name(player_name))
 		end
 
@@ -390,7 +378,7 @@ function md_effects.give_effect(player, effect_name, duration)
 		victim.timer = 0
     end
 
-    -- if there is a hud to display
+    -- if there is a hud to display, set it
     if player:is_player() then
 		potions_set_icons(player)
 	end
@@ -398,7 +386,7 @@ end
 
 --------------------------------------------------------------------------
 
--- return the number of minutes
+-- A readable time string
 local function time_string(dur)
 	if not dur then
 		return nil
@@ -463,9 +451,7 @@ function md_effects.return_on_use(consumable_def)
 end
 
 function md_effects.register_consumable(name, consumable_def)
-
     local on_use = nil
-    --local eff = md_effects.registered_effects[consumable_def.effect_name]
     if consumable_def then
         on_use = md_effects.return_on_use(consumable_def)
     end

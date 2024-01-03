@@ -23,6 +23,10 @@ minetest.register_on_joinplayer(function(player)
 	-- end
 	-- player:set_formspec_prepend(formspec)
 
+	player:set_lighting({
+		shadows = { intensity = 0.5 }
+	})
+
 	-- Hide sensitive debug info
 	player:hud_set_flags({basic_debug = false, minimap = false})
 
