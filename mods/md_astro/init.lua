@@ -4,8 +4,6 @@ local modname = minetest.get_modpath("md_astro")
 local sun_moon_scale = 1
 
 minetest.register_on_joinplayer(function(player)
-    md_astro.set_player_moon(player)
-    md_astro.set_player_sun(player)
 	player:set_clouds({
 		height = 300
 	})
@@ -32,7 +30,8 @@ minetest.register_on_joinplayer(function(player)
 		}
 	})
 
-	--player:override_day_night_ratio(minetest.get_timeofday())
+	md_astro.set_player_moon(player)
+	md_astro.set_player_sun(player)
 end)
 
 minetest.register_on_shutdown(function()
@@ -43,6 +42,10 @@ end)
 minetest.register_globalstep(function(dtime)
      -- do astro step
     md_astro.do_step()
+end)
+
+minetest.register_on_mods_loaded(function()
+	md_astro.refresh_visuals()
 end)
 
 dofile(modname .. "/api.lua")

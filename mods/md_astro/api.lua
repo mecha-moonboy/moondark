@@ -61,7 +61,6 @@ end
 -- Increment the month(moon cycle) and
 -- do any month start behaviour.
 function md_astro.increment_moon_cycle()
-
     moon_cycle = moon_cycle + 1
     if moon_cycle > year_length then
         moon_cycle = 1
@@ -122,6 +121,23 @@ function md_astro.set_player_suns_all(state)
             texture = "sun_".. state ..".png"
         })
     end
+end
+
+-- Refresh visuals.
+function md_astro.refresh_visuals()
+    local phase
+    if moon_cycle == 1 or moon_cycle == 2 then
+        phase = "default"
+    elseif moon_cycle == 3 or moon_cycle == 4 then
+        phase = "summer"
+    elseif moon_cycle == 5 or moon_cycle == 6 then
+        phase = "default"
+    elseif moon_cycle == 7 or moon_cycle == 8 then
+        phase = "winter"
+    end
+    if phase then md_astro.set_player_suns_all(phase) end
+
+    md_astro.set_player_moons_all(moon_phase)
 end
 
 -- Duh.
