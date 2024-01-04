@@ -7,6 +7,8 @@ creatura.register_utility("md_mobs:die", function(self)
 			creatura.action_fallover(_self)
 			init = true
 		end
+
+		-- kil
 		timer = timer - _self.dtime
 		if timer <= 0 then
 			local pos = _self.object:get_pos()
