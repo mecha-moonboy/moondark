@@ -35,7 +35,7 @@ function md_herbs.check_conditions(pos, herb)
     if herb.biomes then
         local biome_data = minetest.get_biome_data(pos)
         if not checkBiome(herb.biomes, minetest.get_biome_name(biome_data.biome)) then
-            minetest.log("Biome check failed")
+            --minetest.log("Biome check failed")
             return false
         end
     end
@@ -49,7 +49,7 @@ function md_herbs.check_conditions(pos, herb)
     end
 
     if herb.min_light and minetest.get_node_light(pos, 0.5) < herb.min_light then
-        minetest.log("min lighting check failed")
+        --minetest.log("min lighting check failed")
         return false
     end
 

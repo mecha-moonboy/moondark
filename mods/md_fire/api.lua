@@ -155,7 +155,10 @@ end
 
 -- get the output of a given item being cooked, item name
 function md_fire.get_recipe_output(item_name)
-    return md_fire.registered_fire_recipes[item_name].output
+    if md_fire.registered_fire_recipes[item_name].output then
+        return md_fire.registered_fire_recipes[item_name].output
+    end
+    return ""
 end
 
 -- basic fire node data

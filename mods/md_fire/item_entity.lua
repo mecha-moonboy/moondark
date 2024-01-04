@@ -19,7 +19,9 @@ local item = {
 		local fire_level = minetest.get_node_group(node_name, "fire")
 		if fire_level >= self.flammable then
 			local output = md_fire.get_recipe_output(self.itemstack:get_name())
-			minetest.add_item(p, ItemStack(output))
+			if output then
+				minetest.add_item(p, ItemStack(output .. " " .. self.itemstack:get_count()))
+			end
 			self.object:remove() -- edit to cook item instead of removing it
 		else
 		end
