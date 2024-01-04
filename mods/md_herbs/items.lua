@@ -2,7 +2,7 @@ md_effects.register_consumable("md_herbs:thrumberry", {
     description = "thrumberry",
     inventory_image = "berries.png",
     groups = {food = 1},
-    color = "#117711ff",
+    color = "#330066ff",
     effect_name = "md_herbs:thrumberry_effect",
     on_consume = function(user)
         md_effects.give_effect(user, "md_herbs:thrumberry_effect", 5)

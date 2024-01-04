@@ -21,13 +21,21 @@ Herb Definition:
 
 md_herbs.register_herb({
     herb_node = "md_herbs:brawsterry_bush",
-    weight = 50,
-    max_light = 7,
+    weight = 1,
+    max_light = 8,
     node_under = "moondark:turf",
 })
 
 md_herbs.register_herb({
-    herb_node = "moondark:grass",
+    herb_node = "md_herbs:thrumberry_bush",
     weight = 1,
-    min_light = 9
+    min_light = 7,
+    node_under = "moondark:turf",
+    biomes = {"plains"}
 })
+
+-- md_herbs.register_herb({
+--     herb_node = "moondark:grass",
+--     weight = 1,
+--     min_light = 9
+-- })

@@ -1,6 +1,17 @@
 md_herbs = {}
 md_herbs.registered_herbs = {}
 
+
+local function checkBiome(targets, biome)
+    for _, targ in ipairs(targets) do
+        minetest.log("Checking pair. Target: " .. dump(targ) .. " Biomes " .. dump(biome))
+        if biome == targ then
+            return true
+        end
+    end
+    return false
+end
+
 -- REGISTER --
 
 function md_herbs.register_herb(herb_definition)
@@ -13,11 +24,6 @@ end
 
 -- run through a list of boolean checks
 function md_herbs.check_conditions(pos, herb)
-
-    if herb.node_under and minetest.get_node(pos:offset(0, -1, 0)).name ~= herb.node_under then
-        return false
-    end
-
     if herb.max_altitude and pos.y > herb.max_altitude then
         return false
     end
@@ -26,11 +32,24 @@ function md_herbs.check_conditions(pos, herb)
         return false
     end
 
+    if herb.biomes then
+        local biome_data = minetest.get_biome_data(pos)
+        if not checkBiome(herb.biomes, minetest.get_biome_name(biome_data.biome)) then
+            minetest.log("Biome check failed")
+            return false
+        end
+    end
+
+    if herb.node_under and minetest.get_node(pos:offset(0, -1, 0)).name ~= herb.node_under then
+        return false
+    end
+
     if herb.max_light and minetest.get_node_light(pos, 0.5) > herb.max_light then
         return false
     end
 
     if herb.min_light and minetest.get_node_light(pos, 0.5) < herb.min_light then
+        minetest.log("min lighting check failed")
         return false
     end
 
