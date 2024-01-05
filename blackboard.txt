@@ -1,30 +1,32 @@
 In Progress:
+    - Mob API
+    - Fire
     - everything
-    - hand loom -> cloth -> curtain
-    - apsen bark + cord + charcoal = notebook
-    - farming [0/10] - theorize farming system
+
+Pending Completion: --
+
+To Do:
+    - Smithing system
+    - Apsen bark + cord + charcoal = notebook
+    - Farming [0/10] - theorize farming system
         - Irrigation
         - Crop Nodes
         - Harvesting
         - Processing
-    - cooking [0/10]
-    - food eating [1/10] - cooldown?
-
-Pending Completion:
-
-To Do:
+    - Cooking
+    - Hand loom -> cloth -> curtain
+    - Food eating [4/10] - cooldown?
     - Divination and dowsing for ores and other resources
     - More chat commands, expose settings
-    - Clean up and documentation
     - Actual creative mode
     - Automatic critter spawning
     Immediate:
-        - ice
-        - hand loom -> cloth -> basket
-        - fix hidden midlight collision
-        - armor/accessories:
-            - footwear (speed boost, fall resistance factor)
-            - clothing (cold resistance, slight armor bonus)
+        - Ice
+        - Hand loom -> cloth -> basket
+        - Fix hidden midlight collision
+        - Armor/accessories:
+            - Footwear (speed boost, fall resistance factor)
+            - Clothing (cold resistance, slight armor bonus)
 
     Bugfixes:
 
@@ -34,12 +36,10 @@ To Do:
             - Spear and projectile
             - Critter net
             - Traps
-            - Fire
             - Crucible
             - Molds
 
         Systems:
-            - Mob API
             - Wanderers - NPCs, have a rapport system and can do menial tasks
 
         Materials:
@@ -57,24 +57,24 @@ To Do:
         - Add status effect HUD markers
 
     Biomes:
-        - desert
-        - swamp
-        - snow forest
-        - rocky desert (stones, perhaps some snow, sparse bushes, flat)
-        - rocky plains (large boulders, snow, sparse trees and bushes)
-        - ancient redwoods
+        - Desert
+        - Swamp
+        - Snow forest
+        - Rocky desert (stones, perhaps some snow, sparse bushes, flat)
+        - Rocky plains (large boulders, snow, sparse trees and bushes)
+        - Ancient redwoods
 
     Trees:
-        - apsen - [birch]
-        - granmove - [mangrove]
-        - sprute, cones - [spruce]
-        - wideleaf - jungle
-        - dustgrain - desert
-        - wedrood - huge, evergreen, red[wood]
+        - Apsen - [birch]
+        - Granmove - [mangrove]
+        - Sprute, cones - [spruce]
+        - Wideleaf - jungle
+        - Dustgrain - desert
+        - Wedrood - huge, evergreen, red[wood]
 
     Flora:
-        - berry bushes for farming and health
-        - flowers for status effects
+        - Berry bushes for farming and health
+        - Flowers for status effects
 
         - Sadie - white
         - Liovet - purple
@@ -88,13 +88,14 @@ To Do:
         - creepers - vine
 
     Node Critters:
-        - snairls - snail
-        - ribbid - frog
-        - serpin - snek
-        - malc - clam
+        - Snairls - snail
+        - Ribbid - frog
+        - Serpin - snek
+        - Malc - clam
 
 
 Done:
+    - Clean up and documentation 01/03/2024
     Cosmetic:
     - Health and Breath Rework
     - Hotbar Retexture (not final)
@@ -133,55 +134,54 @@ Done:
             - Malpa
             - Noconuts
     - Tools:
-        - tinder
-        - rake
-        - stone axe, pickaxe, and machete
-        - digging tool
+        - Tinder
+        - Rake
+        - Stone axe, pickaxe, and machete
+        - Digging tool
 
 # Brainstorming #
 
 Feature wall:
     Farming:
-        - crop growth timer and parameters
-        - seasons
-        - stages
-        - harvesting
+        - Crop growth timer and parameters
+        - Seasons
+        - Stages
+        - Harvesting
     Magic:
-        - action magic (attraction, repulsion)
-        - vibration magic (frequency, vibration)
+        - Action magic (attraction, repulsion)
+        - Vibration magic (frequency, vibration)
 
-        - potion brewing
-        - herb gathering
-        - druidry
-        - ritual casting
+        - Potion brewing
+        - Herb gathering
+        - Druidry
+        - Ritual casting
 
-        - instruments
-        - astrology
-        - disaster cycle
-        - prevent disaster
+        - Instruments
+        - Astrology
+        - Disaster cycle
+        - Prevent disaster
 
-        - wizardry
-        - artifice
+        - Wizardry
+        - Artifice
 
-        - sorcery
-        - enchantment
+        - Sorcery
+        - Enchantment
 
-        - geomancy
+        - Geomancy
 
-        - golemancy
+        - Golemancy
 
     Smithing:
-        - smelting
-        - casting
-        - forging
-        - quenching
-        - finishing
+        - Smelting
+        - Casting
+        - Forging
+        - Quenching
+        - Finishing
 
 Theory:
     - Using ABMs for resonance and vibration
     - Node golems that move using node timers
     - Geocentric astrology along outside of walls
-
 
 
 LEGEND:
