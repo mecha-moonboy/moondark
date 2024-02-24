@@ -4,7 +4,7 @@ md_herbs.registered_herbs = {}
 
 local function checkBiome(targets, biome)
     for _, targ in ipairs(targets) do
-        minetest.log("Checking pair. Target: " .. dump(targ) .. " Biomes " .. dump(biome))
+        --minetest.log("Checking pair. Target: " .. dump(targ) .. " Biomes " .. dump(biome))
         if biome == targ then
             return true
         end
