@@ -69,6 +69,11 @@ function md_herbs.check_conditions(pos, herb)
         return false
     end
 
+    if minetest.find_node_near(pos, herb.min_radius, herb.herb_node, true) then
+        minetest.log("Herbs too close together, skipping placement")
+        return false
+    end
+
     return true
 end
 

@@ -6,9 +6,9 @@ In Progress:
 Pending Completion: --
 
 To Do:
+    - Apsen bark + cord + charcoal = notebook
     - Smithing system
     - Apsen tree
-    - Apsen bark + cord + charcoal = notebook
     - Farming [0/10] - theorize farming system
         - Irrigation
         - Crop Nodes

@@ -23,6 +23,7 @@ md_herbs.register_herb({
     herb_node = "md_herbs:brawsterry_bush",
     weight = 1,
     max_light = 8,
+    min_radius = 5,
     node_under = "moondark:turf",
 })
 
@@ -30,6 +31,7 @@ md_herbs.register_herb({
     herb_node = "md_herbs:thrumberry_bush",
     weight = 1,
     min_light = 7,
+    min_radius = 5,
     node_under = "moondark:turf",
     biomes = {"plains"}
 })
