@@ -7,6 +7,7 @@ Pending Completion: --
 
 To Do:
     - Smithing system
+    - Apsen tree
     - Apsen bark + cord + charcoal = notebook
     - Farming [0/10] - theorize farming system
         - Irrigation
@@ -22,6 +23,7 @@ To Do:
     - Automatic critter spawning
     Immediate:
         - Ice
+        - Special stone in mountains
         - Hand loom -> cloth -> basket
         - Fix hidden midlight collision
         - Armor/accessories:

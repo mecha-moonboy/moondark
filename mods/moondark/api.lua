@@ -143,11 +143,11 @@ function moondark_core.start_decay(pos)
 		new_pos = minetest.find_node_near(pos, 2, "group:leaves", false)
 
 
-		local extra_node = minetest.find_node_near(pos, 2, "group:leaves", false)
-		if extra_node then
-			moondark_core.start_decay(extra_node)
-		moondark_core.simple_destroy_node(extra_node, "sword")
-		end
+		-- local extra_node = minetest.find_node_near(pos, 2, "group:leaves", false)
+		-- if extra_node then
+		-- 	moondark_core.start_decay(extra_node)
+		-- moondark_core.simple_destroy_node(extra_node, "sword")
+		-- end
 	end
 
 end
