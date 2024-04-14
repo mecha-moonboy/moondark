@@ -24,6 +24,8 @@ How I want to control it:
 
 ]]
 
+local mod_textures = minetest.get_modpath(md_astro.modname)
+
 local month_length = 8
 local year_length = 8
 
@@ -80,7 +82,7 @@ end
 -- Set a specific player's moon.
 function md_astro.set_player_moon(player)
     player:set_moon({
-        texture = md_astro.modname.."/moon_" .. moon_phase .. ".png"
+        texture = "moon_" .. moon_phase .. ".png"
     })
 end
 
@@ -99,7 +101,7 @@ function md_astro.set_player_sun(player)
 
     if not phase then return end
     player:set_sun({
-        texture = md_astro.modname.."/sun_" .. phase .. ".png"
+        texture = "sun_" .. phase .. ".png"
     })
 end
 
@@ -108,7 +110,7 @@ function md_astro.set_player_moons_all(phase)
     local players = minetest.get_connected_players()
     for _, player in ipairs(players) do
         player:set_moon({
-            texture = md_astro.modname.."/moon_".. phase ..".png"
+            texture = "moon_".. phase ..".png"
         })
     end
 end
@@ -118,7 +120,7 @@ function md_astro.set_player_suns_all(state)
     local players = minetest.get_connected_players()
     for _, player in ipairs(players) do
         player:set_sun({
-            texture = md_astro.modname.."/sun_".. state ..".png"
+            texture = "sun_".. state ..".png"
         })
     end
 end
