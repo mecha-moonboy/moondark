@@ -1,5 +1,5 @@
 md_astro = {}
-local modname = minetest.get_modpath("md_astro")
+md_astro.modname = minetest.get_modpath("md_astro")
 
 local sun_moon_scale = 1
 
@@ -48,4 +48,4 @@ minetest.register_on_mods_loaded(function()
 	md_astro.refresh_visuals()
 end)
 
-dofile(modname .. "/api.lua")
+dofile(md_astro.modname .. "/api.lua")

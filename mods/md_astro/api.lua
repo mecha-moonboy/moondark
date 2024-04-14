@@ -1,5 +1,4 @@
 --[[
-
 - generate skyboxes from layered textures
 - track seasons, moon phases, and messenger orbits
 
@@ -24,6 +23,7 @@ How I want to control it:
     - acid
 
 ]]
+
 local month_length = 8
 local year_length = 8
 
@@ -33,7 +33,7 @@ local meta = minetest.get_mod_storage()
 local curr_day = meta:get_int("curr_day") or 0
 local moon_phase = meta:get_int("moon_phase") or 1 -- Day (20 min)
 local moon_cycle = meta:get_int("moon_cycle") or 1 -- Month (160 minutes)(8 days)
-local year = meta:get_int("year") or 1       -- Year (16hrs)(8 months, 64 days)
+local year = meta:get_int("year") or 1             -- Year (16hrs)(8 months, 64 days)
 
 -- Execute this on globalstep.
 function md_astro.do_step()
@@ -80,7 +80,7 @@ end
 -- Set a specific player's moon.
 function md_astro.set_player_moon(player)
     player:set_moon({
-        texture = "moon_" .. moon_phase .. ".png"
+        texture = md_astro.modname.."/moon_" .. moon_phase .. ".png"
     })
 end
 
@@ -99,7 +99,7 @@ function md_astro.set_player_sun(player)
 
     if not phase then return end
     player:set_sun({
-        texture = "sun_" .. phase .. ".png"
+        texture = md_astro.modname.."/sun_" .. phase .. ".png"
     })
 end
 
@@ -108,7 +108,7 @@ function md_astro.set_player_moons_all(phase)
     local players = minetest.get_connected_players()
     for _, player in ipairs(players) do
         player:set_moon({
-            texture = "moon_".. phase ..".png"
+            texture = md_astro.modname.."/moon_".. phase ..".png"
         })
     end
 end
@@ -118,7 +118,7 @@ function md_astro.set_player_suns_all(state)
     local players = minetest.get_connected_players()
     for _, player in ipairs(players) do
         player:set_sun({
-            texture = "sun_".. state ..".png"
+            texture = md_astro.modname.."/sun_".. state ..".png"
         })
     end
 end

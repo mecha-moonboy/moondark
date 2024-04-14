@@ -1,10 +1,13 @@
+--minetest.register_alias("modblock", "modname:nodename")
 minetest.register_alias("mapgen_stone", "moondark:stone")
 minetest.register_alias("mapgen_water_source", "moondark:water_source")
 minetest.register_alias("dirt", "moondark:dirt")
 minetest.register_alias("sand", "moondark:sand")
 minetest.register_alias("turf", "moondark:turf")
 minetest.register_alias("snow", "moondark:snow")
-minetest.register_alias("oak", "moondark:oak_log")
+--minetest.register_alias("oak", "moondark:oak_log")
+minetest.register_alias("modblock", "modname:nodename")
+
 
 --minetest.set_mapgen_setting(name, value, [override_meta])
 
