@@ -1,4 +1,4 @@
-md_template_mod = {}
+md_fauna = {}
 local modname = minetest.get_modpath("md_fauna")
 
 
@@ -17,4 +17,5 @@ end
 --      -- do things every frame
 -- end)
 
---dofile(modname .. "/api.lua")
+dofile(modname .. "/mob_ai.lua")
+dofile(modname .. "/mobs/whale.lua")
