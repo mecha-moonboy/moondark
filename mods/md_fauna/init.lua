@@ -19,3 +19,4 @@ end
 
 dofile(modname .. "/mob_ai.lua")
 dofile(modname .. "/mobs/whale.lua")
+dofile(modname .. "/spawning.lua")

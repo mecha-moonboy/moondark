@@ -33,7 +33,7 @@ md_herbs.register_herb({
     min_light = 7,
     min_radius = 5,
     node_under = "moondark:turf",
-    biomes = {"plains"}
+    biomes = {"moondark:plains"}
 })
 
 -- md_herbs.register_herb({

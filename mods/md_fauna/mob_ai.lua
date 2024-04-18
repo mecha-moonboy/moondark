@@ -255,7 +255,6 @@ creatura.register_utility("md_fauna:swim_wander", function(self)
 	local function func(mob)
 		if not mob:get_action() then -- there isn't another action queued
 			if not mob.in_liquid then -- this mob is not in liquid
-				--minetest.log("Not in liquid")
 				local mob_pos = mob.object:get_pos()
 				local water_nodes = minetest.find_nodes_in_area(vec_sub(mob_pos, 10), vec_add(mob_pos, 10), "moondark:water_source")
 				local water_node = water_nodes[random(#water_nodes)]
@@ -273,7 +272,6 @@ creatura.register_utility("md_fauna:swim_wander", function(self)
 				end
 
 				-- if there is a water node within the area
-				--minetest.log("There should be a water node nearby")
 			end
 
 			if not mob.idle_in_water -- mob is not idle in water
