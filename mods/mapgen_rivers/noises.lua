@@ -2,13 +2,13 @@ local def_setting = mapgen_rivers.define_setting
 
 mapgen_rivers.noise_params = {
 	base = def_setting('np_base', 'noise', {
-		offset = 0,
-		scale = 300,
+		offset = 100,
+		scale = 500,
 		seed = 2469,
 		octaves = 8,
 		spread = {x=2048, y=2048, z=2048},
-		persist = 0.6,
-		lacunarity = 2,
+		persist = 0.75,
+		lacunarity = 1.5,
 		flags = "eased",
 	}),
 
