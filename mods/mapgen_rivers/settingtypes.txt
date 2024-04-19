@@ -1,0 +1,117 @@
+# File containing all settings for 'mapgen_rivers' mod.
+
+#    Whether the map should be centered at x=0, z=0.
+mapgen_rivers_center (Center map) bool true
+
+#    Represents horizontal map scale. Every cell of the grid will be upscaled to
+#    a square of this size.
+#    For example if the grid size is 1000x1000 and block size is 12,
+#    the actual size of the map will be 12000.
+mapgen_rivers_blocksize (Block size) float 15.0 2.0 100.0
+
+#    X size of the grid being generated
+#    Actual size of the map is grid_x_size * blocksize
+mapgen_rivers_grid_x_size (Grid X size) int 1000 50 5000
+
+#    Z size of the grid being generated
+#    Actual size of the map is grid_z_size * blocksize
+mapgen_rivers_grid_z_size (Grid Z size) int 1000 50 5000
+
+#    Minimal catchment area for a river to be drawn, in square nodes
+#    Lower value means bigger river density
+mapgen_rivers_min_catchment (Minimal catchment area) float 3600.0 100.0 1000000.0
+
+#    Coefficient describing how rivers widen when merging.
+#    Riwer width is a power law W = a*D^p. D is river flow and p is this parameter.
+#    Higher value means that a river will grow more when receiving a tributary.
+#    Note that a river can never exceed 2*blocksize.
+mapgen_rivers_river_widening_power (River widening power) float 0.5 0.0 1.0
+
+#    Lateral slope of the riverbed.
+#    Higher value means deeper rivers.
+mapgen_rivers_riverbed_slope (Riverbed slope) float 0.4 0.0 2.0
+
+#    Enable horizontal distorsion (shearing) of landscape, to break the regularity
+#    of grid cells and allow overhangs.
+#    Distorsion uses two 3D noises and thus is intensive in terms of computing time.
+mapgen_rivers_distort (Distorsion) bool true
+
+#    Enable biome generation.
+#    If 'biomegen' mod is installed, 'mapgen_rivers' will generate biomes from the
+#    native biome system. If 'biomegen' is not present, will generate only grass and
+#    snow.
+mapgen_rivers_biomes (Biomes) bool true
+
+#    Whether to enable glaciers.
+#    Glaciers are widened river sections, covered by ice, that are generated in
+#    very cold areas.
+mapgen_rivers_glaciers (Glaciers) bool false
+
+#    River channels are widened by this factor if they are a glacier.
+mapgen_rivers_glacier_widening_factor (Glacier widening factor) float 8.0 1.0 20.0
+
+#    Temperature value decreases by this quantity for every node, vertically.
+#    This results in mountains being more covered by snow.
+mapgen_rivers_elevation_chill (Elevation chill) float 0.25 0.0 5.0
+
+#    If enabled, loads all grid data in memory at init time.
+#    If disabled, data will be loaded on request and cached in memory.
+#    It's recommended to disable it for very large maps (> 2000 grid nodes or so)
+mapgen_rivers_load_all (Load all data in memory) bool false
+
+[Landscape evolution parameters]
+
+#    Modelled landscape evolution time, in arbitrary units
+mapgen_rivers_evol_time (Landscape evolution time) float 10.0 0.0 100.0
+
+#    Model time steps in arbitrary units
+#    Smaller values will result in more time steps to be necessary to
+#    complete the simulation, taking more time.
+mapgen_rivers_evol_time_step (Landscape evolution time step) float 1.0 0.0 50.0
+
+#    To adjust river erosion proportionnally.
+#    This type of erosion acts by deepening the valleys.
+mapgen_rivers_river_erosion_coef (River erosion coefficient) float 0.5 0.0 10.0
+
+#    Represents how much river erosion depends on river flow (catchment area).
+#    Catchment area is elevated to this power.
+#    Extreme cases: 0.0 -> All rivers have the same erosive capabilities
+#    1.0 -> Erosion is proportional to river flow
+#    Reasonable values are generally between 0.4 and 0.7.
+#
+#    This parameter is extremely sensitive, and changes may require to adjust
+#    'river_erosion_coef' as well.
+mapgen_rivers_river_erosion_power (River erosion power) float 0.4 0.0 1.0
+
+#    Intensity of diffusive erosion.
+#    Smoothes peaks and valleys, and tends to prevent sharp cliffs from forming.
+mapgen_rivers_diffusive_erosion (Diffusive erosion) float 0.5 0.0 10.0
+
+#    Radius of compensation for isostatic/tectonic processes
+#    Tectonic uplift forces will have a diffuse effect over this radius
+mapgen_rivers_compensation_radius (Tectonic compensation radius) float 50 1.0 1000.0
+
+#    Speed of evolution of tectonic conditions between steps
+#    Higher values means tectonics will be very different from one step to the other,
+#    resulting in geologically unstable and more varied landforms (plateau, gorge, lake...)
+mapgen_rivers_tectonic_speed (Tectonic speed) float 70 0 10000
+
+[Noises]
+
+#    Y level of terrain at a very large scale. Only used during pre-generation.
+#    X and Z axes correspond to map's X and Z directions, and Y axis is time.
+#    Successive XZ slices of this noise represent successive tectonic states.
+mapgen_rivers_np_base (Terrain base noise) noise_params_3d 0, 300, (2048, 2048, 2048), 2469, 8, 0.6, 2.0, eased
+
+#    This noise will shear the terrain on the X axis,
+#    to break the regularity of the river grid.
+mapgen_rivers_np_distort_x (X-axis distorsion noise) noise_params_3d 0, 1, (64, 32, 64), -4574, 3, 0.75, 2.0
+
+#    This noise will shear the terrain on the Z axis,
+#    to break the regularity of the river grid.
+mapgen_rivers_np_distort_z (Z-axis distorsion noise) noise_params_3d 0, 1, (64, 32, 64), -7940, 3, 0.75, 2.0
+
+#    Amplitude of the distorsion.
+#    Too small values may leave the grid pattern apparent,
+#    and too high values could make the terrain insanely twisted.
+mapgen_rivers_np_distort_amplitude (Distorsion amplitude noise) noise_params_2d 0, 10, (1024, 1024, 1024), 676, 5, 0.5, 2.0, absvalue
