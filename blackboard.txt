@@ -2,10 +2,12 @@ In Progress:
     - Mob API
     - Fire
     - everything
+    - whale
 
 Pending Completion: --
 
 To Do:
+    - Hostile mob
     - Apsen bark + cord + charcoal = notebook
     - Smithing system
     - Apsen tree
@@ -85,9 +87,9 @@ To Do:
         - florncower - blue
         - Nimperpel - orange
         - Ladias - red
-        - rushmoom - caps, mushrooms (duh)
-        - gunfus - tree fungus
-        - creepers - vine
+        - Rushmoom - caps, mushrooms (duh)
+        - Gunfus - tree fungus
+        - Creepers - vine
 
     Node Critters:
         - Snairls - snail
@@ -97,12 +99,13 @@ To Do:
 
 
 Done:
+    - Added baby whales, model, spawning, swimming behavior, animations
     - Clean up and documentation 01/03/2024
     Cosmetic:
     - Health and Breath Rework
     - Hotbar Retexture (not final)
     Mechanical/Features:
-    - Bigger terrain
+    - Bigger terrain (not final)
     - Charcoal stacks
     - Status Effects API
     - Herb API
