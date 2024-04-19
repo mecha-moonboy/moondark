@@ -1,0 +1,10 @@
+name: mapgen_rivers
+
+channels:
+    - conda-forge
+
+dependencies:
+    - python
+    - matplotlib
+    - numpy
+    - colorcet

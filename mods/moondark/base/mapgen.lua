@@ -169,7 +169,13 @@ minetest.register_biome({ name = "abyssal_pit",
     humidity_point = 50
 })
 
--- Trees
+minetest.register_biome({name = "caves",
+    node_stone = "mapgen_stone",
+    y_max = 15000,
+    y_min = -15000,
+})
+-- Trees --
+
 minetest.register_decoration({ name = "moondark:lowan_tree",
     deco_type = "schematic",
     place_on = {"moondark:turf"},
