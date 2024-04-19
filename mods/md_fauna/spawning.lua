@@ -13,7 +13,7 @@ end
 
 creatura.register_abm_spawn("md_fauna:whale", {
     --interval = 1,
-    chance = 50000,
+    chance = 100000,
     min_height = -20,
 	max_height = -2,
 	min_group = 2,
