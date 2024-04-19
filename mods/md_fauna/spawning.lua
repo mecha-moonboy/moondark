@@ -9,23 +9,26 @@ local function table_contains(tbl, val)
 	return false
 end
 
+-- Mob Spawns --
+
 creatura.register_abm_spawn("md_fauna:whale", {
     --interval = 1,
-    chance = 20000,
-    min_height = -40,
-	max_height = -10,
+    chance = 50000,
+    min_height = -20,
+	max_height = -2,
 	min_group = 2,
-	max_group = 4,
+	max_group = 3,
     nodes = {"group:water"},
     neighbors = {"sand", "stone", "group:water"},
     --biomes = {"moondark:ocean"}
 })
 
+-- Spawner Decoration --
 minetest.register_node("md_fauna:spawner", {
 	description = "???",
 	drawtype = "airlike",
 	walkable = false,
-    floodable = true,
+    floodable = false,
 	pointable = true,
 	sunlight_propagates = true,
 	groups = {oddly_breakable_by_hand = 1, not_in_creative_inventory = 1}
@@ -50,6 +53,8 @@ minetest.register_decoration({
 	fill_ratio = 0.0001, -- One node per chunk
 	decoration = "md_fauna:spawner"
 })
+
+-- Spawn ABM --
 
 local function do_on_spawn(pos, obj)
 	local name = obj and obj:get_luaentity().name

@@ -1,10 +1,6 @@
-----------
--- Fish --
-----------
-
 creatura.register_mob("md_fauna:whale", {
 	-- Engine Props
-	visual_size = {x = 10, y = 10},
+	visual_size = {x = 1, y = 1},
 	meshes = {
 		"md_fauna_whale.b3d",
 	},
@@ -24,19 +20,19 @@ creatura.register_mob("md_fauna:whale", {
 	damage = 0,
 	max_breath = 0,
 	speed = 3,
-	tracking_range = 6,
+	tracking_range = 32,
 	max_boids = 6,
-	boid_seperation = 0.3,
+	boid_seperation = 10,
 	despawn_after = 200,
 	max_fall = 0,
 	stepheight = 1.1,
 	hitbox = {
-		width = 2,
-		height = 2
+		width = 0.75,
+		height = 1
 	},
 	animations = {
-		swim = {range = {x = 0, y = 24}, speed = 4, frame_blend = 0.3, loop = true},
-		roll = {range = {x = 25, y = 48}, speed = 4, frame_blend = 0.3, loop = true},
+		swim = {range = {x = 0, y = 24}, speed = 8, frame_blend = 0.3, loop = true},
+		roll = {range = {x = 25, y = 48}, speed = 8, frame_blend = 0.3, loop = true},
 	},
 	liquid_submergence = 10,
 	liquid_drag = 1,
