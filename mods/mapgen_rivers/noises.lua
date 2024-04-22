@@ -8,7 +8,7 @@ mapgen_rivers.noise_params = {
 		octaves = 8,
 		spread = {x=2048, y=2048, z=2048},
 		persist = 0.75,
-		lacunarity = 1.5,
+		lacunarity = 0.3,
 		flags = "eased",
 	}),
 
